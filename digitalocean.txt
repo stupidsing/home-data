@@ -1,0 +1,52 @@
+sudo mv /etc/ufw/before.rules /etc/ufw/before.rules0
+(
+echo '*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8051
+COMMIT
+'
+sudo cat /etc/ufw/before.rules0
+) > /etc/ufw/before.rules
+
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 8051/tcp
+sudo ufw enable
+
+sudo apt update
+sudo apt dist-upgrade
+sudo apt install -y --no-install-recommends openjdk-8-jdk
+sudo init 6
+
+sudo adduser ywsing
+sudo su - ywsing
+
+mkdir ${HOME}/workspace
+cd ${HOME}/workspace
+git clone https://github.com/stupidsing/suite.git
+
+echo '#!/bin/bash
+
+HOME=${HOME}
+. ${HOME}/.bashrc
+
+(cd ${HOME}/workspace/suite/ &&
+  git pull &&
+  echo | ./run.sh &&
+  #(timeout 3600 mvn test > ~/public_html/suite-test.out 2>&1; true) &&
+  rm -f precompiled/*.old &&
+  #zip -r ${HOME}/public_html/suite.zip run.sh precompiled/* target/suite-1.0-jar-with-dependencies.jar &&
+  true
+) > /dev/null
+' > ${HOME}/daily.sh
+
+echo '0 2 * * * ${HOME}/daily.sh' | crontab -
+
+wget -O - http://ftp.cuhk.edu.hk/pub/packages/apache.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar zxf -
+
+echo '. ~/bin/variables.sh' > ${HOME}/.bashrc
+
+echo 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-i386/jre
+export M2_HOME=$(find ${HOME}/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
+export PATH=${M2_HOME}/bin:${HOME}/bin:${PATH}
+' > ${HOME}/bin/variables.sh

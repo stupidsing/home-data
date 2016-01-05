@@ -1,0 +1,27 @@
+## http://tools.android.com/tech-docs/new-build-system/version-compatibility
+
+ANDROID_HOME=/home/friends/ywsing/kitties/android-sdk-linux
+#ANDROID_HOME=C:/Kitties/android-sdk-windows
+
+${ANDROID_HOME}/tools/android list sdk
+
+# 1- Android SDK Build-tools, revision 23.0.2
+# 2- Documentation for Android SDK, API 23, revision 1
+# 8- SDK Platform Android 4.4.2, API 19, revision 2
+${ANDROID_HOME}/tools/android update sdk --no-ui --filter 1,2,8
+
+TARGET=$(${ANDROID_HOME}/tools/android list targets | grep "android-19" | cut -d' ' -f2)
+
+rm -rf /tmp/Sample
+${ANDROID_HOME}/tools/android create project --name Sample --path /tmp/Sample --target ${TARGET} --package suite.sample --activity SampleActivity --gradle --gradle-version 1.1.3
+
+sed 's/gradle-.*-all.zip/gradle-2.3-all.zip/g' -i /tmp/Sample/gradle/wrapper/gradle-wrapper.properties
+mv /tmp/Sample/build.gradle /tmp/Sample/build.gradle0
+cat /tmp/Sample/build.gradle0 | grep -v -i proguard > /tmp/Sample/build.gradle
+(cd /tmp/Sample && ANDROID_HOME=${ANDROID_HOME} ./gradlew --stacktrace assembleDebug)
+
+${ANDROID_HOME}/tools/android create avd --name SampleAVD --path /tmp/SampleAVD --target ${TARGET} --silent
+${ANDROID_HOME}/tools/emulator -avd SampleAVD
+${ANDROID_HOME}/tools/android delete avd --name SampleAVD
+
+find /tmp/Sample -name \*.apk

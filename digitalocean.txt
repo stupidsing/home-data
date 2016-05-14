@@ -1,4 +1,8 @@
+sudo adduser ywsing
+sudo su - ywsing
+
 sudo mv /etc/ufw/before.rules /etc/ufw/before.rules0
+
 (
 echo '*nat
 :PREROUTING ACCEPT [0:0]
@@ -13,13 +17,12 @@ sudo ufw allow 80/tcp
 sudo ufw allow 8051/tcp
 sudo ufw enable
 
+sudo add-apt-repository -y ppa:webupd8team/java
 sudo apt update
 sudo apt dist-upgrade
-sudo apt install -y --no-install-recommends openjdk-8-jdk
+sudo apt install -y --no-install-recommends git oracle-java8-installer rlwrap
+#sudo apt install -y --no-install-recommends openjdk-8-jdk
 sudo init 6
-
-sudo adduser ywsing
-sudo su - ywsing
 
 mkdir ${HOME}/workspace
 cd ${HOME}/workspace
@@ -40,13 +43,28 @@ HOME=${HOME}
 ) > /dev/null
 ' > ${HOME}/daily.sh
 
-echo '0 2 * * * ${HOME}/daily.sh' | crontab -
+echo 'apt update
+apt \
+    -o quiet=1 \
+    -o APT::Get::List-Cleanup=false \
+    -o APT::Get::Show-Upgraded=true \
+    -o Dir::Etc::SourceList=/home/ywsing/security.sources.list \
+    -o Dir::Etc::SourceParts=/dev/null \
+    upgrade -y
+shutdown -r +1' > ${HOME}/apt-update-security.sh
+
+echo '0 2 * * * /home/ywsing/daily.sh' | crontab -
+echo '0 3 * * * /home/ywsing/apt-update-security.sh' | sudo crontab -
 
 wget -O - http://ftp.cuhk.edu.hk/pub/packages/apache.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar zxf -
 
 echo '. ~/bin/variables.sh' > ${HOME}/.bashrc
 
-echo 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-i386/jre
+echo '#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-i386/jre
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
 export M2_HOME=$(find ${HOME}/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
 export PATH=${M2_HOME}/bin:${HOME}/bin:${PATH}
+export HISTCONTROL=erasedups:ignoreboth
 ' > ${HOME}/bin/variables.sh
+
+echo "set completion-ignore-case on" >> ~/.inputrc

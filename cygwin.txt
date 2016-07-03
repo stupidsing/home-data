@@ -1,0 +1,17 @@
+cvs
+diffutils
+dos2unix
+fish
+less
+gcc-g++
+gdb
+git
+mintty
+patch
+python
+rar
+rsync
+subversion
+unzip
+vim
+zip

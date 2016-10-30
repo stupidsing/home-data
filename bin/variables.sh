@@ -7,4 +7,4 @@ export PATH=/opt/go_appengine:${JAVA_HOME}/bin:${M2_HOME}/bin:${HOME}/bin:${PATH
 alias google-chrome="google-chrome --incognito"
 
 PS1='[\t ($?)] '
-export HISTCONTROL=erasedups:${HISTCONTROL}
+export HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}

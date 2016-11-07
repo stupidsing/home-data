@@ -1,0 +1,12 @@
+URxvt.background:		[95]#000000
+URxvt.font:			7x14bold
+URxvt.foreground:		[95]#AAAAAA
+URxvt.scrollBar:		false
+yeahconsole*aniDelay:		40
+yeahconsole*consoleHeight:	40
+yeahconsole*restart:		1
+yeahconsole*screenWidth:	840
+yeahconsole*stepSize:		0
+yeahconsole*term:		urxvt
+yeahconsole*toggleKey:		+F1
+yeahconsole*xOffset:		420

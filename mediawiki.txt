@@ -16,10 +16,10 @@ sudo /etc/init.d/apache2 restart
 firefox https://ywsing.onedse.com/mediawiki/
 
 echo "\$wgSMTP = array(
-'host' => "ssl://smtp.gmail.com",
-'IDhost' => "gmail.com",
+'host' => 'ssl://smtp.gmail.com',
+'IDhost' => 'gmail.com',
 'port' => 465,
 'auth' => true,
-'username' => "user_name@mydomain.com",
-'password' => "user_password"
+'username' => 'user_name@mydomain.com',
+'password' => 'user_password'
 );" | sudo tee -a /etc/mediawiki/LocalSettings.php

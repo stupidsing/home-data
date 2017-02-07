@@ -55,10 +55,11 @@ sudo service apache2 restart
 echo '/usr/local/sbin/certbot-auto renew >> /var/log/le-renew.log' | sudo tee /etc/cron.weekly/certbot-auto
 sudo chmod 755 /etc/cron.weekly/certbot-auto
 
-# add to /etc/apache2/sites-enabled/000-default.conf
+# BEGIN add to /etc/apache2/sites-enabled/000-default.conf
 #ProxyPreserveHost On
 #ProxyPass /ywsing http://127.0.0.1:8051/
 #ProxyPassReverse /ywsing http://127.0.0.1:8051/
+# END add to /etc/apache2/sites-enabled/000-default.conf
 
 firefox https://ywsing.onedse.com/mediawiki/
 mediawiki/xxx

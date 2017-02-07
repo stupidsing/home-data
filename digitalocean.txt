@@ -64,6 +64,8 @@ firefox https://ywsing.onedse.com/mediawiki/
 mediawiki/xxx
 
 ################################################################################
+ssh-keygen -t rsa
+
 (
 mkdir ${HOME}/workspace
 cd ${HOME}/workspace

@@ -245,7 +245,8 @@ apt-get update && (
     deborphan \
     g++ libreadline-dev rlwrap zip \
     openjdk-8-jdk \
-    terminator tilda \
+    rxvt-unicode terminator yeahconsole \
+    xclip \
     asunder mpg321 \
     gcin tint2 \
     compiz-plugins \
@@ -253,7 +254,7 @@ apt-get update && (
     abiword gnumeric dia \
     pcmanfm gpicview leafpad \
     gconf-editor gnome-tweak-tool compizconfig-settings-manager \
-    thunderbird google-chrome-stable w3m \
+    thunderbird chromium w3m \
     pidgin pidgin-hotkeys \
     subversion git-core \
     ssh sshfs cifs-utils \

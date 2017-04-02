@@ -3,6 +3,7 @@ python -c "if 1:
 	def nl(): sys.stdout.write('\n')
 	for line in sys.stdin.readlines():
 		for c in line:
+			if c == ']' or c == '}': nl()
 			sys.stdout.write(c)
 			if c == '[' or c == '{' or c == ',': nl()
 " | python -c "if 1:

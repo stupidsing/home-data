@@ -1,3 +1,4 @@
+curl
 cvs
 diffutils
 dos2unix

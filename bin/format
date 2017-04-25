@@ -1,0 +1,29 @@
+python -c "if 1:
+	import sys
+	def nl(): sys.stdout.write('\n')
+	for line in sys.stdin.readlines():
+		for c in line:
+			if c == ']' or c == '}': nl()
+			sys.stdout.write(c)
+			if c == '[' or c == '{' or c == ',': nl()
+" | python -c "if 1:
+	import sys
+	t = ''
+	for line in sys.stdin.readlines():
+		for c in line:
+			t = t + c
+			if len(t) > 3:
+				h, t = t[0], t[1:]
+				sys.stdout.write(h)
+			if t == '{\n}': t = '{}'
+	print t,
+" | python -c "if 1:
+	import sys
+	indent = 0
+	for line in sys.stdin.readlines():
+		first, last = line[:1], line.strip()[-1:]
+		if first == ']' or first == '}': indent = indent - 1
+		sys.stdout.write(indent * '  ')
+		if last == '[' or last == '{': indent = indent + 1
+		sys.stdout.write(line)
+"

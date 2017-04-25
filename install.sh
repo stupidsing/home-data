@@ -240,28 +240,58 @@ EOF
 # Adds ppa repository for newer packages
 #add-apt-repository ppa:ubuntu-mozilla-daily/ppa
 
-apt-get update && (
-  apt-get -y --force-yes --no-install-recommends install \
-    deborphan \
-    g++ libreadline-dev rlwrap zip \
-    openjdk-8-jdk \
-    terminator tilda \
-    asunder mpg321 \
-    gcin tint2 \
+apt update && (
+  apt -y --force-yes --no-install-recommends install \
+    abiword \
+    asunder \
+    bochs \
+    chromium \
+    cifs-utils \
+    compizconfig-settings-manager \
     compiz-plugins \
-    vim scite xchm \
-    abiword gnumeric dia \
-    pcmanfm gpicview leafpad \
-    gconf-editor gnome-tweak-tool compizconfig-settings-manager \
-    thunderbird google-chrome-stable w3m \
-    pidgin pidgin-hotkeys \
-    subversion git-core \
-    ssh sshfs cifs-utils \
-    bochs virtualbox \
-    dosbox gnugo supertux torcs wine xscavenger \
-    icedtea-7-plugin \
-    fontforge ttf-wqy-zenhei \
+    deborphan \
+    dosbox \
+    fontforge \
+    g++ \
+    gcin \
+    gconf-editor \
+    git-core \
+    gnome-tweak-tool \
+    gnugo \
+    gnumeric \
     gparted \
+    gpicview \
+    graphviz \
+    icedtea-8-plugin \
+    imagemagick \
+    leafpad \
+    libreadline-dev \
+    mpg321 \
+    openjdk-8-jdk \
+    pcmanfm \
+    pidgin \
+    pidgin-hotkeys \
+    rlwrap \
+    rxvt-unicode \
+    scite \
+    ssh \
+    sshfs \
+    subversion \
+    supertux \
+    terminator \
+    thunderbird \
+    tint2 \
+    torcs \
+    ttf-wqy-zenhei \
+    vim \
+    virtualbox \
+    w3m \
+    wine \
+    xchm \
+    xclip \
+    xscavenger \
+    yeahconsole \
+    zip \
   ||
   exit 1
 ) &&

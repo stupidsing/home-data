@@ -1,3 +1,4 @@
+################################################################################
 sudo adduser ywsing
 sudo su - ywsing
 
@@ -14,23 +15,81 @@ sudo cat /etc/ufw/before.rules0
 
 sudo ufw allow 22/tcp
 sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
 sudo ufw allow 8051/tcp
 sudo ufw enable
 
+################################################################################
 sudo add-apt-repository -y ppa:webupd8team/java
 sudo apt update
 sudo apt dist-upgrade
-sudo apt install -y --no-install-recommends git oracle-java8-installer rlwrap
+sudo apt install -y --no-install-recommends build-essential git imagemagick libapache2-mod-proxy-html libxml2-dev mediawiki mediawiki-extensions-math mediawiki-math mysql-server oracle-java8-installer php5-gd rlwrap
 #sudo apt install -y --no-install-recommends openjdk-8-jdk
+
+echo 'apt update
+apt \
+    -o quiet=1 \
+    -o APT::Get::List-Cleanup=false \
+    -o APT::Get::Show-Upgraded=true \
+    -o Dir::Etc::SourceList=/home/ywsing/security.sources.list \
+    -o Dir::Etc::SourceParts=/dev/null \
+    upgrade -y
+shutdown -r +1
+' | sudo tee /etc/cron.daily/apt-security
+sudo chmod 755 /etc/cron.daily/apt-security
+
 sudo init 6
 
+################################################################################
+wget https://dl.eff.org/certbot-auto
+sudo mv certbot-auto /usr/local/sbin/certbot-auto
+sudo chmod 755 /usr/local/sbin/certbot-auto
+certbot-auto --apache -d ywsing.onedse.com
+
+sudo a2enmod mediawiki proxy proxy_ajp proxy_http rewrite deflate headers proxy_balancer proxy_connect proxy_html
+
+sudo sed 's/#Alias/Alias/g' -i /etc/mediawiki/apache.conf
+
+sudo service apache2 restart
+
+echo '/usr/local/sbin/certbot-auto renew >> /var/log/le-renew.log' | sudo tee /etc/cron.weekly/certbot-auto
+sudo chmod 755 /etc/cron.weekly/certbot-auto
+
+# BEGIN add to /etc/apache2/sites-enabled/000-default.conf
+#ProxyPreserveHost On
+#ProxyPass /ywsing http://127.0.0.1:8051/
+#ProxyPassReverse /ywsing http://127.0.0.1:8051/
+# END add to /etc/apache2/sites-enabled/000-default.conf
+
+firefox https://ywsing.onedse.com/mediawiki/
+mediawiki/xxx
+
+################################################################################
+ssh-keygen -t rsa
+
+(
 mkdir ${HOME}/workspace
 cd ${HOME}/workspace
 git clone https://github.com/stupidsing/suite.git
+)
+
+echo '0 2 * * * /home/ywsing/daily.sh' | crontab -
+
+wget -O - http://ftp.cuhk.edu.hk/pub/packages/apache.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar zxf -
+
+echo '. ~/bin/variables.sh' > ${HOME}/.bashrc
+echo "set completion-ignore-case on" >> ~/.inputrc
+
+echo '#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-i386/jre
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
+export M2_HOME=$(find ${HOME}/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
+export PATH=${M2_HOME}/bin:${HOME}/bin:${PATH}
+export HISTCONTROL=erasedups:ignoreboth
+' > ${HOME}/bin/variables.sh
 
 echo '#!/bin/bash
 
-HOME=${HOME}
+HOME='${HOME}'
 . ${HOME}/.bashrc
 
 (cd ${HOME}/workspace/suite/ &&
@@ -42,29 +101,3 @@ HOME=${HOME}
   true
 ) > /dev/null
 ' > ${HOME}/daily.sh
-
-echo 'apt update
-apt \
-    -o quiet=1 \
-    -o APT::Get::List-Cleanup=false \
-    -o APT::Get::Show-Upgraded=true \
-    -o Dir::Etc::SourceList=/home/ywsing/security.sources.list \
-    -o Dir::Etc::SourceParts=/dev/null \
-    upgrade -y
-shutdown -r +1' > ${HOME}/apt-update-security.sh
-
-echo '0 2 * * * /home/ywsing/daily.sh' | crontab -
-echo '0 3 * * * /home/ywsing/apt-update-security.sh' | sudo crontab -
-
-wget -O - http://ftp.cuhk.edu.hk/pub/packages/apache.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar zxf -
-
-echo '. ~/bin/variables.sh' > ${HOME}/.bashrc
-
-echo '#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-i386/jre
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
-export M2_HOME=$(find ${HOME}/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
-export PATH=${M2_HOME}/bin:${HOME}/bin:${PATH}
-export HISTCONTROL=erasedups:ignoreboth
-' > ${HOME}/bin/variables.sh
-
-echo "set completion-ignore-case on" >> ~/.inputrc

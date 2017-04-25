@@ -402,7 +402,7 @@ DO="
   wget http://jd.benow.ca/jd-eclipse/downloads/jdeclipse_update_site.zip
 ) &&
 (cd /opt/eclipse/ &&
-  unzip /tmp/jdeclipse_update_site.zip plugins/jd.ide.eclipse.linux.x86_64_0.1.4.jar plugins/jd.ide.eclipse_0.1.4.jar
+  unzip /tmp/jdeclipse_update_site.zip plugins/jd.ide.eclipse.linux.x86_64_0.1.5.jar plugins/jd.ide.eclipse_0.1.5.jar
 )
 "
 # # Window -> Preferences ->

@@ -23,7 +23,7 @@ sudo ufw enable
 sudo add-apt-repository -y ppa:webupd8team/java
 sudo apt update
 sudo apt dist-upgrade
-sudo apt install -y --no-install-recommends build-essential git imagemagick libapache2-mod-proxy-html libxml2-dev mediawiki mediawiki-extensions-math mediawiki-math mysql-server oracle-java8-installer php5-gd rlwrap
+sudo apt install -y --no-install-recommends build-essential git imagemagick libapache2-mod-proxy-html libxml2-dev mediawiki mediawiki-extensions-math mediawiki-math mysql-server openjdk-8-jdk oracle-java8-installer php5-gd rlwrap
 #sudo apt install -y --no-install-recommends openjdk-8-jdk
 
 echo 'apt update

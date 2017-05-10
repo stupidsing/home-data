@@ -1,11 +1,14 @@
 python -c "if 1:
 	import sys
 	def nl(): sys.stdout.write('\n')
+	quote = 0
 	for line in sys.stdin.readlines():
 		for c in line:
-			if c == ']' or c == '}': nl()
+			if c == chr(39): quote = 1 - quote
+			if c == chr(34): quote = 2 - quote
+			if quote == 0 and c in [']', '}']: nl()
 			sys.stdout.write(c)
-			if c == '[' or c == '{' or c == ',': nl()
+			if quote == 0 and c in ['[', '{', ',']: nl()
 " | python -c "if 1:
 	import sys
 	t = ''
@@ -22,8 +25,8 @@ python -c "if 1:
 	indent = 0
 	for line in sys.stdin.readlines():
 		first, last = line[:1], line.strip()[-1:]
-		if first == ']' or first == '}': indent = indent - 1
+		if first in [']', '}']: indent = indent - 1
 		sys.stdout.write(indent * '  ')
-		if last == '[' or last == '{': indent = indent + 1
+		if last in ['[', '{']: indent = indent + 1
 		sys.stdout.write(line)
 "

@@ -4,6 +4,7 @@ diffutils
 dos2unix
 fish
 less
+libxml2
 gcc-g++
 gdb
 git

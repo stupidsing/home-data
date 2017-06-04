@@ -272,6 +272,7 @@ apt update && (
     pidgin \
     pidgin-hotkeys \
     rlwrap \
+	rsync \
     rxvt-unicode \
     scite \
     ssh \

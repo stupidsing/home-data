@@ -17,4 +17,5 @@ rsync
 subversion
 unzip
 vim
+wget
 zip

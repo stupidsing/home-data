@@ -6,7 +6,26 @@ export M2_HOME=$(find /opt/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
 export PATH=/opt/go_appengine:${JAVA_HOME}/bin:${M2_HOME}/bin:${HOME}/bin:${PATH}
 export PATH=$(find /opt/ -maxdepth 1 -name gradle-\* | sort | tail -1)/bin:${PATH}
 
-alias chromium="chromium --incognito"
+home() {
+	if [ "${1}" ]; then
+		H=${1:0:1}
+		T=${1:1}
+		case "${H}" in
+		u)
+			(cd ~/workspace/home-data/ && git diff && (git commit -m - stock.txt || true) && git push && git pull) &&
+			(cd ~/workspace/suite/ && git pull && git status)
+			;;
+		s)
+			(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)
+			;;
+		y)
+			rsync -avz stupidsing.no-ip.org:public_html/docs/ ~/docs/
+			rsync -avz ~/docs/ stupidsing.no-ip.org:public_html/docs/
+			;;
+		esac &&
+		home "${T}"
+	fi
+}
 
 PS1='[\t ($?)] '
 export HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}

@@ -13,6 +13,7 @@ patch
 poppler
 python
 rar
+rlwrap
 rsync
 subversion
 unzip

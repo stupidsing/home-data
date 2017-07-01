@@ -245,6 +245,7 @@ apt update && (
     abiword \
     asunder \
     bochs \
+    catdoc \
     chromium \
     cifs-utils \
     compizconfig-settings-manager \

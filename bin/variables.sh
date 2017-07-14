@@ -6,6 +6,11 @@ export M2_HOME=$(find /opt/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
 export PATH=/opt/go_appengine:${JAVA_HOME}/bin:${M2_HOME}/bin:${HOME}/bin:${PATH}
 export PATH=$(find /opt/ -maxdepth 1 -name gradle-\* | sort | tail -1)/bin:${PATH}
 
+rsync2() {
+	rsync -avz "${2}" "${1}"
+	rsync -avz "${1}" "${2}"
+}
+
 stock() {
 	if [ "${1}" ]; then
 		H=${1:0:1}
@@ -19,8 +24,8 @@ stock() {
 			(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)
 			;;
 		y)
-			rsync -avz stupidsing.no-ip.org:public_html/docs/ ~/docs/
-			rsync -avz ~/docs/ stupidsing.no-ip.org:public_html/docs/
+			rsync2 ~/docs/ stupidsing.no-ip.org:public_html/docs/
+			rsync2 ~/.fonts/ stupidsing.no-ip.org:public_html/fonts/
 			rsync -avz ~/yahoo/ stupidsing.no-ip.org:yahoo/
 			;;
 		esac &&

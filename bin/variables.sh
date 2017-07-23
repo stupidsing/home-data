@@ -16,6 +16,9 @@ stock() {
 		H=${1:0:1}
 		T=${1:1}
 		case "${H}" in
+		h)
+			while read S; do grep ${S}.HK ~/workspace/home-data/stock.txt; echo; echo; done
+			;;
 		u)
 			(cd ~/workspace/home-data/ && git pull && git diff && (git commit -m - stock.txt || true) && git push) &&
 			(cd ~/workspace/suite/ && git pull && git status)

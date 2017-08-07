@@ -19,12 +19,12 @@ stock() {
 		h)
 			while read S; do grep ${S}.HK ~/workspace/home-data/stock.txt; echo; echo; done
 			;;
+		s)
+			(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)
+			;;
 		u)
 			(cd ~/workspace/home-data/ && git pull && git diff && (git commit -m - stock.txt || true) && git push) &&
 			(cd ~/workspace/suite/ && git pull && git status)
-			;;
-		s)
-			(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)
 			;;
 		y)
 			rsync2 ~/docs/ stupidsing.no-ip.org:public_html/docs/

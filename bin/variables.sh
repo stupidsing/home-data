@@ -17,7 +17,7 @@ stock() {
 		T=${1:1}
 		case "${H}" in
 		h)
-			while read S; do grep ${S}.HK ~/workspace/home-data/stock.txt; echo; echo; done
+			while read S; do [ "${S}" ] && grep ${S}.HK ~/workspace/home-data/stock.txt; echo; echo; done
 			;;
 		o)
 		cat /tmp/orders |

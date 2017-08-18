@@ -20,17 +20,17 @@ stock() {
 			while read S; do [ "${S}" ] && grep ${S}.HK ~/workspace/home-data/stock.txt; echo; echo; done
 			;;
 		o)
-		cat /tmp/orders |
-		egrep -A3 'Pending' |
-		egrep -v '^--|^Delete|^Modify' |
-		python -c "if True:
-		  import sys
-		  f, line0 = 0, ''
-		  for line in sys.stdin:
-		    if f: print line0.replace('Details', '').strip(), line.strip()
-		    f, line0 = 1 - f, line
-		" |
-		tee ~/orders.txt
+			cat /tmp/orders |
+			egrep -A3 'Pending' |
+			egrep -v '^--|^Delete|^Modify' |
+			python -c "if True:
+				import sys
+				f, line0 = 0, ''
+				for line in sys.stdin:
+					if f: print line0.replace('Details', '').strip(), line.strip()
+					f, line0 = 1 - f, line
+			" |
+			tee /tmp/orders
 		;;
 		s)
 			(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)

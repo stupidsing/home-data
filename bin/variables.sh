@@ -49,5 +49,11 @@ stock() {
 	fi
 }
 
+suite() {
+	P0=${1}
+	shift
+	(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=${P0} -Dexec.args="$@")
+}
+
 PS1='[\t ($?)] '
 export HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}

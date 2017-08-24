@@ -50,9 +50,9 @@ stock() {
 }
 
 suite() {
-	P0=${1}
+	MAINCLASS=${1}
 	shift
-	(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=${P0} -Dexec.args="$@")
+	(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=${MAINCLASS} -Dexec.args="$@")
 }
 
 PS1='[\t ($?)] '

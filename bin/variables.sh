@@ -30,6 +30,7 @@ stock() {
 					if f: print line0.replace('Details', '').strip(), line.strip()
 					f, line0 = 1 - f, line
 			" |
+			sort |
 			tee /tmp/orders
 		;;
 		s)

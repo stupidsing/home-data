@@ -41,7 +41,7 @@ stock() {
 			;;
 		y)
 			rsync2 ~/docs/ stupidsing.no-ip.org:public_html/docs/
-			rsync2 ~/.fonts/ stupidsing.no-ip.org:public_html/fonts/
+			#rsync2 ~/.fonts/ stupidsing.no-ip.org:public_html/fonts/
 			#rsync -avz ~/yahoo/ stupidsing.no-ip.org:yahoo/
 			;;
 		esac &&

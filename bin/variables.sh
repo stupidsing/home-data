@@ -22,7 +22,7 @@ stock() {
 		o)
 			cat /tmp/orders |
 			egrep -A3 'Pending' |
-			egrep -v '^--|^Delete|^Modify' |
+			egrep -v '^--|^Delete|^Modify|^Please' |
 			python -c "if True:
 				import sys
 				f, line0 = 0, ''

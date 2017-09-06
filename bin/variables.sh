@@ -33,6 +33,16 @@ stock() {
 			sort |
 			tee /tmp/orders
 		;;
+		q)
+		while read S; do
+			[ "${S}" ] && (
+				printf 'sina '; curl -s http://hq.sinajs.cn/?list=rt_hk0${S} | cut -d, -f7
+				printf 'yhoo '; curl -s https://download.finance.yahoo.com/d/quotes.csv?f=sl1\&s=${S}.HK
+			)
+			echo
+			echo
+		done
+		;;
 		s)
 			(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)
 			;;

@@ -7,6 +7,8 @@ gcc-g++
 gdb
 git
 mintty
+mingw64-x86_64-gcc-core
+mingw64-x86_64-gcc-g++
 patch
 poppler
 python

@@ -268,7 +268,7 @@ apt update && (
     leafpad \
     libreadline-dev \
     mpg321 \
-    openjdk-8-jdk \
+    openjdk-9-jdk \
     pcmanfm \
     pidgin \
     pidgin-hotkeys \

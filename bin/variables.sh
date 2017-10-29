@@ -67,4 +67,5 @@ suite() {
 }
 
 PS1='[\t ($?)] '
+alias pk="pkill -f"
 export HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}

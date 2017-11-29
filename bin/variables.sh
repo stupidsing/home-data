@@ -19,6 +19,16 @@ stock() {
 		h)
 			while read S; do [ "${S}" ] && grep ${S}.HK ~/workspace/home-data/stock.txt; echo; echo; done
 			;;
+		i)
+			curl -s 'http://www.aastocks.com/en/mobile/Quote.aspx?symbol=5' |
+			grep -A1 HSI | tail -1 | cut -d. -f1 | python -c 'if True:
+				import sys
+				for line in sys.stdin.readlines():
+					for c in line:
+						if "0" <= c and c <= "9": sys.stdout.write(c)
+				print
+			'
+			;;
 		o)
 			cat /tmp/orders |
 			egrep -A3 'Pending' |
@@ -32,17 +42,25 @@ stock() {
 			" |
 			sort |
 			tee /tmp/orders
-		;;
+			;;
 		q)
-		while read S; do
-			[ "${S}" ] && (
-				printf 'sina '; curl -s http://hq.sinajs.cn/?list=rt_hk0${S} | cut -d, -f7
-				printf 'yhoo '; curl -s https://download.finance.yahoo.com/d/quotes.csv?f=sl1\&s=${S}.HK
-			)
-			echo
-			echo
-		done
-		;;
+			while read S; do
+				[ "${S}" ] && (
+					printf 'aast '; curl -s http://www.aastocks.com/en/mobile/Quote.aspx?symbol=0${S} |
+					grep -A1 text_last | tail -1 | python -c 'if True:
+						import sys
+						for line in sys.stdin.readlines():
+							for c in line.replace(".png", "").replace("0px", ""):
+								if "0" <= c and c <= "9" or c == ".": sys.stdout.write(c)
+						print
+					'
+					printf 'sina '; curl -s http://hq.sinajs.cn/?list=rt_hk0${S} | cut -d, -f7
+					#printf 'yhoo '; curl -s https://download.finance.yahoo.com/d/quotes.csv?f=sl1\&s=${S}.HK
+				)
+				echo
+				echo
+			done
+			;;
 		s)
 			(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)
 			;;

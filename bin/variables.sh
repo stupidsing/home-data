@@ -65,6 +65,13 @@ stock() {
 			(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)
 			;;
 		u)
+			cat ~/workspace/home-data/stock.txt | python -c "if True:
+				import sys
+				for line in sys.stdin.readlines():
+					while 0 <= line.find('  '): line = line.replace('  ', ' ')
+					print line.replace(' ', '\\t'),
+			" > /tmp/stock.txt
+			mv /tmp/stock.txt ~/workspace/home-data/stock.txt
 			(cd ~/workspace/home-data/ && git pull && git diff && (git commit -m - stock.txt || true) && git push) &&
 			(cd ~/workspace/suite/ && git pull && git status)
 			;;

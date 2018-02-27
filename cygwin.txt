@@ -2,6 +2,7 @@ curl
 diffutils
 dos2unix
 less
+lftp
 libxml2
 gcc-g++
 gdb

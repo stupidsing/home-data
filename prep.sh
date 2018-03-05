@@ -13,19 +13,8 @@ ctl.!default {
 }
 " > ${HOME}/.asoundrc
 
-printf "URxvt.background:		[95]#000000
-URxvt.font:			7x14bold
-URxvt.foreground:		[95]#AAAAAA
-URxvt.scrollBar:		false
-yeahconsole*aniDelay:		40
-yeahconsole*consoleHeight:	40
-yeahconsole*restart:		1
-yeahconsole*screenWidth:	840
-yeahconsole*stepSize:		0
-yeahconsole*term:		urxvt
-yeahconsole*toggleKey:		+F1
-yeahconsole*xOffset:		420
-" > ${HOME}/.Xresources
+printf ". ${HOME}/bin/variables.sh
+" > ${HOME}/.bashrc
 
 printf "font.base=font:Droid Sans,size:10
 font.small=font:Droid Sans,size:8
@@ -44,6 +33,20 @@ set ts=4
 set viminfo=
 syn on
 " > ${HOME}/.vimrc
+
+printf "URxvt.background:		[95]#000000
+URxvt.font:			7x14bold
+URxvt.foreground:		[95]#AAAAAA
+URxvt.scrollBar:		false
+yeahconsole*aniDelay:		40
+yeahconsole*consoleHeight:	40
+yeahconsole*restart:		1
+yeahconsole*screenWidth:	840
+yeahconsole*stepSize:		0
+yeahconsole*term:		urxvt
+yeahconsole*toggleKey:		+F1
+yeahconsole*xOffset:		420
+" > ${HOME}/.Xresources
 
 printf "xset r rate 200 56
 xinput --set-prop 'USB OPTICAL MOUSE ' 'libinput Accel Speed' 1

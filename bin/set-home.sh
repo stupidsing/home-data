@@ -44,11 +44,11 @@ runIfNotThere tint2
 runIfNotThere terminator -m
 runIfNotThere xfce4-clipman
 runIfNotThere yeahconsole
-(export GTK2_RC_FILES=/home/ywsing/.tight-gtkrc-2.0 && export SWT_GTK3=0 && runIfNotThere /opt/eclipse/eclipse -data /home/ywsing/workspace)
+(export GTK2_RC_FILES=~/.tight-gtkrc-2.0 && export SWT_GTK3=0 && runIfNotThere /opt/eclipse/eclipse -data ~/workspace)
 
 #runIfNotThere /opt/idea-IC-129.451/bin/idea.sh
 #runIfNotThere minitube
-#(export PYTHONPATH=/home/ywsing/terminator/install/lib/python2.7/site-packages:/usr/share/terminator && runIfNotThere /home/ywsing/terminator/install/bin/terminator -m)
+#(export PYTHONPATH=~/terminator/install/lib/python2.7/site-packages:/usr/share/terminator && runIfNotThere ~/terminator/install/bin/terminator -m)
 #runIfNotThere tilda
 #runIfNotThere wifi.sh
 #runIfNotThere xcompmgr -cfF -t-9 -l-11 -r9 -o.95 -D6

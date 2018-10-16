@@ -1,14 +1,15 @@
 python -c "if 1:
 	import sys
 	def nl(): sys.stdout.write('\n')
-	quote = 0
+	pc, quote = '', 0
 	for line in sys.stdin.readlines():
 		for c in line:
 			if c == chr(39): quote = 1 - quote
 			if c == chr(34): quote = 2 - quote
 			if quote == 0 and c in [']', '}']: nl()
-			sys.stdout.write(c)
+			if quote != 0 or c != ' ': sys.stdout.write(c)
 			if quote == 0 and c in ['[', '{', ',']: nl()
+			pc = c
 " | python -c "if 1:
 	import sys
 	t = ''

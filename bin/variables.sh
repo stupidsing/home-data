@@ -1,10 +1,10 @@
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
+export GRADLE_HOME=~/gradle-4.10.2
 export JAVA_HOME=/usr/lib/jvm/java-9-openjdk-i386
 #export JAVA_HOME=$(find /opt/ -maxdepth 1 -name jdk\* | sort | tail -1)
 export M2_HOME=$(find /opt/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
-export PATH=/opt/go_appengine:${JAVA_HOME}/bin:${M2_HOME}/bin:${HOME}/bin:${PATH}
-export PATH=$(find /opt/ -maxdepth 1 -name gradle-\* | sort | tail -1)/bin:${PATH}
+export PATH=/opt/go_appengine:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${HOME}/bin:${PATH}
 
 replace() {
 	#CMD="sed 's/abc/def/g'"

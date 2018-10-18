@@ -6,6 +6,42 @@ export JAVA_HOME=/usr/lib/jvm/java-9-openjdk-i386
 export M2_HOME=$(find /opt/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
 export PATH=/opt/go_appengine:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${HOME}/bin:${PATH}
 
+format() {
+	python -c "if 1:
+		import sys
+		def nl(): sys.stdout.write('\n')
+		pc, quote = '', 0
+		for line in sys.stdin.readlines():
+			for c in line:
+				if c == chr(39): quote = 1 - quote
+				if c == chr(34): quote = 2 - quote
+				if quote == 0 and c in [']', '}']: nl()
+				if quote != 0 or c != ' ': sys.stdout.write(c)
+				if quote == 0 and c in ['[', '{', ',']: nl()
+				pc = c
+	" | python -c "if 1:
+		import sys
+		t = ''
+		for line in sys.stdin.readlines():
+			for c in line:
+				t = t + c
+				if len(t) > 3:
+					h, t = t[0], t[1:]
+					sys.stdout.write(h)
+				if t == '{\n}': t = '{}'
+		print t,
+	" | python -c "if 1:
+		import sys
+		indent = 0
+		for line in sys.stdin.readlines():
+			first, last = line[:1], line.strip()[-1:]
+			if first in [']', '}']: indent = indent - 1
+			sys.stdout.write(indent * '  ')
+			if last in ['[', '{']: indent = indent + 1
+			sys.stdout.write(line)
+	"
+}
+
 replace() {
 	#CMD="sed 's/abc/def/g'"
 	CMD="${1}"

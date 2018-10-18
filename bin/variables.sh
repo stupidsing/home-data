@@ -6,6 +6,20 @@ export M2_HOME=$(find /opt/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
 export PATH=/opt/go_appengine:${JAVA_HOME}/bin:${M2_HOME}/bin:${HOME}/bin:${PATH}
 export PATH=$(find /opt/ -maxdepth 1 -name gradle-\* | sort | tail -1)/bin:${PATH}
 
+replace() {
+	#CMD="sed 's/abc/def/g'"
+	CMD="${1}"
+	shift
+	while [ "${1}" ]; do
+		F0="${1}"
+		F1=$(echo "${F0}" | ${CMD})
+		TMP="$(tempfile)"
+		cat "${F0}" | sh -c "${CMD}" > "${TMP}"
+		mv "${TMP}" "${F1}"
+		shift
+	done
+}
+
 rsync2() {
 	rsync -avz "${2}" "${1}"
 	rsync -avz "${1}" "${2}"

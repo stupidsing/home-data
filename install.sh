@@ -351,8 +351,7 @@ WQYFONTCONFIG=/etc/fonts/conf.avail/44-wqy-zenhei.conf
 su ywsing -c "im-switch -s gcin"
 su ywsing -c "gsettings set com.canonical.Unity.Panel systray-whitelist \"['JavaEmbeddedFrame', 'Mumble', 'Wine', 'Skype', 'hp-systray', 'scp-dbus-service', 'gcin']\""
 
-su ywsing -c "mkdir -p workspace/ &&
-  cd workspace/ &&
+su ywsing -c "
   git clone git://github.com/stupidsing/suite.git &&
   #mvn -Declipse.workspace=. eclipse:add-maven-repo
   #cd suite && mvn -Dmaven.test.skip=true eclipse:eclipse install assembly:single

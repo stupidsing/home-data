@@ -67,11 +67,7 @@ mediawiki/xxx
 ################################################################################
 ssh-keygen -t rsa
 
-(
-mkdir ${HOME}/workspace
-cd ${HOME}/workspace
 git clone https://github.com/stupidsing/suite.git
-)
 
 echo '0 2 * * * /home/ywsing/daily.sh' | crontab -
 
@@ -92,7 +88,7 @@ echo '#!/bin/bash
 HOME='${HOME}'
 . ${HOME}/.bashrc
 
-(cd ${HOME}/workspace/suite/ &&
+(cd ${HOME}/suite/ &&
   git pull &&
   echo | ./run.sh &&
   #(timeout 3600 mvn test > ~/public_html/suite-test.out 2>&1; true) &&

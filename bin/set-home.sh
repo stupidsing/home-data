@@ -38,7 +38,7 @@ runIfNotThere chromium --incognito http://www.youtube.com/
 runIfNotThere evince
 runIfNotThere firefox
 runIfNotThere pidgin
-runIfNotThere scite /tmp/orders pad ${HOME}/workspace/home-data/stock.txt
+runIfNotThere scite /tmp/orders pad ${HOME}/home-data/stock.txt
 runIfNotThere thunderbird
 runIfNotThere tint2
 runIfNotThere terminator -m

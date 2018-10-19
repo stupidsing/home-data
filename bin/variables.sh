@@ -67,7 +67,7 @@ stock() {
 		T=${1:1}
 		case "${H}" in
 		h)
-			while read S; do [ "${S}" ] && grep ${S}.HK ~/workspace/home-data/stock.txt; echo; echo; done
+			while read S; do [ "${S}" ] && grep ${S}.HK ~/home-data/stock.txt; echo; echo; done
 			;;
 		i)
 			curl -s 'http://www.aastocks.com/en/mobile/Quote.aspx?symbol=5' |
@@ -112,18 +112,18 @@ stock() {
 			done
 			;;
 		s)
-			(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)
+			(cd ~/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)
 			;;
 		u)
-			cat ~/workspace/home-data/stock.txt | python -c "if True:
+			cat ~/home-data/stock.txt | python -c "if True:
 				import sys
 				for line in sys.stdin.readlines():
 					while 0 <= line.find('  '): line = line.replace('  ', ' ')
 					print line.replace(' ', '\\t'),
 			" > /tmp/stock.txt
-			mv /tmp/stock.txt ~/workspace/home-data/stock.txt
-			(cd ~/workspace/home-data/ && git pull && git diff && (git commit -m - stock.txt || true) && git push) &&
-			(cd ~/workspace/suite/ && git pull && git status)
+			mv /tmp/stock.txt ~/home-data/stock.txt
+			(cd ~/home-data/ && git pull && git diff && (git commit -m - stock.txt || true) && git push) &&
+			(cd ~/suite/ && git pull && git status)
 			;;
 		y)
 			rsync2 ~/docs/ stupidsing.no-ip.org:public_html/docs/
@@ -138,7 +138,7 @@ stock() {
 suite() {
 	MAINCLASS=${1}
 	shift
-	(cd ~/workspace/suite/ && mvn compile exec:java -Dexec.mainClass=${MAINCLASS} -Dexec.args="$@")
+	(cd ~/suite/ && mvn compile exec:java -Dexec.mainClass=${MAINCLASS} -Dexec.args="$@")
 }
 
 PS1='[\t ($?)] '

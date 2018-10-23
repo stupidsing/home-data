@@ -48,7 +48,7 @@ replace() {
 	shift
 	while [ "${1}" ]; do
 		F0="${1}"
-		F1=$(echo "${F0}" | ${CMD})
+		F1=$(echo "${F0}" | "${CMD}")
 		TMP="$(tempfile)"
 		cat "${F0}" | sh -c "${CMD}" > "${TMP}"
 		mkdir -p $(dirname "${F1}")

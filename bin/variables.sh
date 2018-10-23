@@ -51,6 +51,7 @@ replace() {
 		F1=$(echo "${F0}" | ${CMD})
 		TMP="$(tempfile)"
 		cat "${F0}" | sh -c "${CMD}" > "${TMP}"
+		mkdir -p $(dirname "${F1}")
 		mv "${TMP}" "${F1}"
 		shift
 	done

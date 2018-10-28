@@ -19,7 +19,7 @@ runIfNotThere () {
 	fi
 }
 
-cd ${HOME}
+cd ~
 
 # BEGIN set sound
 N=$(cat /proc/asound/cards | grep V19 | cut -d' ' -f2)
@@ -38,7 +38,7 @@ runIfNotThere chromium --incognito http://www.youtube.com/
 runIfNotThere evince
 runIfNotThere firefox
 runIfNotThere pidgin
-runIfNotThere scite /tmp/orders pad ${HOME}/home-data/stock.txt
+runIfNotThere scite pad ~/home-data/stock.txt ~/bin/variables.sh
 runIfNotThere thunderbird
 runIfNotThere tint2
 runIfNotThere terminator -m

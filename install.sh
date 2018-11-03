@@ -289,6 +289,7 @@ apt update && (
     virtualbox \
     w3m \
     wine \
+	wmctrl \
     xchm \
     xclip \
     xscavenger \

@@ -144,4 +144,5 @@ suite() {
 
 PS1='[\t ($?)] '
 alias pk="pkill -f"
+alias s="wmctrl -a"
 HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}

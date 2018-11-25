@@ -6,7 +6,7 @@ PATH=/bin:/usr/bin:$PATH
 export JAVA_HOME
 export PATH
 
-runIfNotThere () {
+runIfNotThere() {
 	if ! pgrep -f $1 > /dev/null; then
 		echo "To run $1..."
 
@@ -34,11 +34,11 @@ ctl.!default {
 "> ~/.asoundrc
 # END set sound
 
-runIfNotThere chromium --incognito http://www.youtube.com/
+runIfNotThere chromium --force-device-scale-factor=2 --high-dpi-support=1 --incognito https://www.facebook.com/ http://finance.yahoo.com/ https://www.youtube.com/ file:///data/storey file:///home/ywsing/docs
 runIfNotThere evince
 runIfNotThere firefox
-runIfNotThere pidgin
-runIfNotThere scite pad ~/home-data/stock.txt ~/bin/variables.sh
+runIfNotThere pcmanfm ~/docs/
+runIfNotThere scite "-position.left=960" "-position.top=540" "-position.width=1920" "-position.height=1080" pad ~/home-data/stock.txt ~/bin/variables.sh
 runIfNotThere thunderbird
 runIfNotThere tint2
 runIfNotThere terminator -m

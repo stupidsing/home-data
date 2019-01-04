@@ -143,6 +143,7 @@ suite() {
 }
 
 PS1='[\t ($?)] '
+PROMPT_COMMAND='echo -en "\e]2;${PWD/\/home\/ywsing/\~}\a"'
 alias pk="pkill -f"
 alias s="wmctrl -a"
 HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}

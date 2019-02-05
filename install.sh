@@ -248,8 +248,6 @@ apt update && (
     catdoc \
     chromium \
     cifs-utils \
-    compizconfig-settings-manager \
-    compiz-plugins \
     deborphan \
     dosbox \
     fontforge \
@@ -263,7 +261,6 @@ apt update && (
     gparted \
     gpicview \
     graphviz \
-    icedtea-8-plugin \
     imagemagick \
     leafpad \
     libreadline-dev \

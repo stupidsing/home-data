@@ -220,6 +220,7 @@ apt update && (
     abiword \
     asunder \
     bochs \
+    build-essential \
     catdoc \
     chromium \
     cifs-utils \

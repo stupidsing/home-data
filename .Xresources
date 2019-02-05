@@ -1,12 +1,14 @@
-URxvt.background:		[95]#000000
-URxvt.font:			7x14bold
-URxvt.foreground:		[95]#AAAAAA
-URxvt.scrollBar:		false
+URxvt.background:			[95]#000000
+!URxvt.font:					10x20
+URxvt.font:					xft:PT Mono
+URxvt.foreground:			[95]#AAAAAA
+URxvt.scrollBar:			false
+Xft.dpi:					180
 yeahconsole*aniDelay:		40
 yeahconsole*consoleHeight:	40
 yeahconsole*restart:		1
-yeahconsole*screenWidth:	840
+yeahconsole*screenWidth:	1920
 yeahconsole*stepSize:		0
-yeahconsole*term:		urxvt
+yeahconsole*term:			urxvt
 yeahconsole*toggleKey:		+F1
-yeahconsole*xOffset:		420
+yeahconsole*xOffset:		960

@@ -1,8 +1,7 @@
 export GDK_SCALE=2
 #export GDK_DPI_SCALE=0.5
-export GRADLE_HOME=~/gradle-5.2
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-#export JAVA_HOME=$(find /opt/ -maxdepth 1 -name jdk\* | sort | tail -1)
+export GRADLE_HOME=$(find ~/ -maxdepth 1 -name gradle-\* | sort | tail -1)
+export JAVA_HOME=$(find /usr/lib/jvm/ -maxdepth 1 -name java-11-\* | sort | tail -1)
 export M2_HOME=$(find ~/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
 export PATH=/opt/go_appengine:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${HOME}/bin:${PATH}
 

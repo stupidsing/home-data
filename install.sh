@@ -142,31 +142,6 @@ gsettings set org.gnome.nautilus.desktop font 'Ubuntu 11'
 gsettings set org.gnome.settings-daemon.peripherals.keyboard delay 250
 gsettings set org.gnome.settings-daemon.peripherals.keyboard repeat-interval 32
 
-gconftool -s /apps/compiz-1/general/screen0/options/hsize -t int 2
-gconftool -s /apps/compiz-1/general/screen0/options/toggle_window_maximized_vertically_key -t string "<Shift><Alt>F10"
-gconftool -s /apps/compiz-1/general/screen0/options/vsize -t int 2
-gconftool -s /apps/compiz-1/plugins/move/allscreens/options/constrain_y -t bool false
-gconftool -s /apps/compiz-1/plugins/move/allscreens/options/opacity -t int 80
-#gconftool -s /apps/compiz-1/plugins/put/screen0/options/maximize_vertically -t string "<Shift><Alt>F10"
-gconftool -s /apps/compiz-1/plugins/put/screen0/options/put_bottom_key -t string "<Super>KP_Down"
-gconftool -s /apps/compiz-1/plugins/put/screen0/options/put_bottomleft_key -t string "<Super>KP_End"
-gconftool -s /apps/compiz-1/plugins/put/screen0/options/put_bottomright_key -t string "<Super>KP_Next"
-gconftool -s /apps/compiz-1/plugins/put/screen0/options/put_center_key -t string "<Super>KP_Begin"
-gconftool -s /apps/compiz-1/plugins/put/screen0/options/put_left_key -t string "<Super>KP_Left"
-gconftool -s /apps/compiz-1/plugins/put/screen0/options/put_right_key -t string "<Super>KP_Right"
-gconftool -s /apps/compiz-1/plugins/put/screen0/options/put_top_key -t string "<Super>KP_Up"
-gconftool -s /apps/compiz-1/plugins/put/screen0/options/put_topleft_key -t string "<Super>KP_Home"
-gconftool -s /apps/compiz-1/plugins/put/screen0/options/put_topright_key -t string "<Super>KP_Prior"
-gconftool -s /apps/compiz-1/plugins/scale/allscreens/options/show_desktop -t bool false
-gconftool -s /apps/compiz-1/plugins/scale/screen0/options/initiate_all_key -t string Disabled
-gconftool -s /apps/compiz-1/plugins/scale/screen0/options/initiate_key -t string "<Super>w"
-gconftool -s /apps/compiz-1/plugins/scale/screen0/options/opacity -t int 28
-gconftool -s /apps/compiz-1/plugins/unityshell/screen0/options/backlight_mode -t int 2
-gconftool -s /apps/compiz-1/plugins/unityshell/screen0/options/launcher_hide_mode -t int 0
-gconftool -s /apps/compiz-1/plugins/unityshell/screen0/options/launcher_switcher_forward -t string "Disabled"
-gconftool -s /apps/compiz-1/plugins/unityshell/screen0/options/launcher_switcher_prev -t string "Disabled"
-#gconftool -s /apps/compiz-1/plugins/unityshell/screen0/options/show_launcher -t string "<Super>period" # affects other hot-keys involving Super
-
 gconftool -s /apps/gedit-2/preferences/ui/toolbar/toolbar_visible -t bool false
 
 gconftool -s /apps/gnome-screensaver/lock_enabled -t bool false
@@ -290,6 +265,7 @@ apt update && (
     wmctrl \
     xchm \
     xclip \
+    xinput \
     xscavenger \
     yeahconsole \
     zip \

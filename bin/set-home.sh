@@ -44,7 +44,7 @@ runIfNotThere tint2
 runIfNotThere terminator -m
 runIfNotThere xfce4-clipman
 runIfNotThere yeahconsole
-(export GTK2_RC_FILES=~/.tight-gtkrc-2.0 && export SWT_GTK3=0 && runIfNotThere /opt/eclipse/eclipse -data ~/workspace)
+(export GTK2_RC_FILES=~/.tight-gtkrc-2.0 && export SWT_GTK3=0 && runIfNotThere ~/eclipse/eclipse -data ~/workspace)
 
 #runIfNotThere /opt/idea-IC-129.451/bin/idea.sh
 #runIfNotThere minitube

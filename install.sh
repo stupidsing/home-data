@@ -273,7 +273,7 @@ apt update && (
     pidgin \
     pidgin-hotkeys \
     rlwrap \
-	rsync \
+    rsync \
     rxvt-unicode \
     scite \
     ssh \
@@ -289,7 +289,7 @@ apt update && (
     virtualbox \
     w3m \
     wine \
-	wmctrl \
+    wmctrl \
     xchm \
     xclip \
     xscavenger \

@@ -34,7 +34,7 @@ ctl.!default {
 "> ~/.asoundrc
 # END set sound
 
-runIfNotThere chromium --force-device-scale-factor=2 --high-dpi-support=1 --incognito https://www.facebook.com/ http://finance.yahoo.com/ https://www.youtube.com/ file:///data/storey file:///home/ywsing/docs
+runIfNotThere chromium --incognito https://www.facebook.com/ http://finance.yahoo.com/ https://www.youtube.com/ file:///data/storey file:///home/ywsing/docs
 runIfNotThere evince
 runIfNotThere firefox
 runIfNotThere pcmanfm ~/docs/

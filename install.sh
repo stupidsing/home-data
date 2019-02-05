@@ -265,6 +265,7 @@ apt update && (
     leafpad \
     libreadline-dev \
     mpg321 \
+    openbox \
     openjdk-11-jdk \
     pcmanfm \
     pidgin \

@@ -252,22 +252,17 @@ echo Please restart.
 # # General -> When Firefox starts: -> Show a blank page
 # # Tabs -> Open new window in a new tab instead -> untick
 
-# download and decompress eclipse
-DO="
-(cd /tmp/ &&
-  wget http://jd.benow.ca/jd-eclipse/downloads/jdeclipse_update_site.zip
-) &&
-(cd /opt/eclipse/ &&
-  unzip /tmp/jdeclipse_update_site.zip plugins/jd.ide.eclipse.linux.x86_64_0.1.5.jar plugins/jd.ide.eclipse_0.1.5.jar
-)
-"
-# # Window -> Preferences ->
-# # General -> Editor -> File Associations ->
-# # *.class without sources -> Associated editors: ->
-# # Add... -> Class File Editor ->
-# # Default
-#
-# install jd-eclipse [mchr3k] from http://mchr3k-eclipse.appspot.com/
+# https://ecd-plugin.github.io/ecd/
+~/eclipse/eclipse -application org.eclipse.equinox.p2.director -repository https://ecd-plugin.github.io/update -installIU org.sf.feeling.decompiler.feature.group
+~/eclipse/eclipse -application org.eclipse.equinox.p2.director -repository https://ecd-plugin.github.io/update -installIU org.sf.feeling.decompiler.cfr
+#~/eclipse/eclipse -application org.eclipse.equinox.p2.director -repository https://ecd-plugin.github.io/update -installIU org.sf.feeling.decompiler.jad
+#~/eclipse/eclipse -application org.eclipse.equinox.p2.director -repository https://ecd-plugin.github.io/update -installIU org.sf.feeling.decompiler.jd
+#~/eclipse/eclipse -application org.eclipse.equinox.p2.director -repository https://ecd-plugin.github.io/update -installIU org.sf.feeling.decompiler.procyon
+
+# Window -> Preferences -> General -> Editors -> File Associations
+# -> "*.class" -> "Class Decompiler Viewer" is selected by default.
+# -> "*.class without source" -> "Class Decompiler Viewer" is selected by default.
+# Window -> Preferences -> Java -> Decompiler -> Default -> CFR (xxx)
 
 # Thunderbird
 # -> Edit -> Preferences

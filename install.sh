@@ -153,8 +153,8 @@ apt-get -y dist-upgrade && (
     imagemagick \
     leafpad libreadline-dev \
     mpg321 \
-    openbox openjdk-11-jdk \
-    pcmanfm \
+    obconf openbox openjdk-11-jdk \
+    pavucontrol pcmanfm \
     rlwrap rsync rxvt-unicode \
     scite ssh sshfs subversion supertux \
     terminator thunderbird \
@@ -226,19 +226,6 @@ su ywsing -c "
   #cd suite/ && mvn -Dmaven.test.skip=true eclipse:eclipse install assembly:single &&
   true
 "
-
-# cat /proc/asound/cards # find sound card number
-
-su ywsing -c "echo 'pcm.!default {
-	type hw
-	card 2
-}
-
-ctl.!default {
-	type hw
-	card 2
-}
-' > /home/ywsing/.asoundrc"
 
 #echo "gtk-menu-popup-delay = 0" > /home/ywsing/.gtkrc-2.0
 

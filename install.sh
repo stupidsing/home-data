@@ -1,9 +1,7 @@
 #!/bin/sh
 
 ################################################################################
-# System-wide setup
-
-sed "s# stretch # sid #g" -i /etc/apt/sources.list
+# Mounts
 
 OLDPARTITION=/dev/sdb1
 
@@ -11,16 +9,17 @@ mount "${OLDPARTITION}" /mnt
 
 ################################################################################
 # System-wide setup
-if ! grep data /etc/fstab > /dev/null; then
+grep data /etc/fstab > /dev/null || (
   mkdir /data
   echo "tmpfs /tmp tmpfs defaults 0 0" >> /etc/fstab
   echo "/dev/sda1 /data ext4 defaults 0 0" >> /etc/fstab
+  echo "${OLDPARTITION} /mnt ext4 defaults 0 0" >> /etc/fstab
   mount -a
-fi
+)
 
-if ! grep datausers /etc/group > /dev/null; then
+grep datausers /etc/group > /dev/null || (
   echo "datausers:x:1001:ywsing" >> /etc/group
-fi
+)
 
 usermod -a -G fuse ywsing
 echo user_allow_other >> /etc/fuse.conf
@@ -139,6 +138,8 @@ EOF
 
 # Adds ppa repository for newer packages
 #add-apt-repository ppa:ubuntu-mozilla-daily/ppa
+
+sed "s# stretch # sid #g" -i /etc/apt/sources.list
 
 apt update &&
 apt-get -y dist-upgrade && (

@@ -3,9 +3,11 @@
 ################################################################################
 # Mounts
 
-OLDPARTITION=/dev/sdb1
+OLDPART=sdb1
+OLDPARTITION=/dev/${OLDPART}
 
-mount "${OLDPARTITION}" /mnt
+mkdir -p /${OLDPART}
+mount "${OLDPARTITION}" /${OLDPART}
 
 ################################################################################
 # System-wide setup
@@ -13,7 +15,7 @@ grep data /etc/fstab > /dev/null || (
   mkdir /data
   echo "tmpfs /tmp tmpfs defaults 0 0" >> /etc/fstab
   echo "/dev/sda1 /data ext4 defaults 0 0" >> /etc/fstab
-  echo "${OLDPARTITION} /mnt ext4 defaults 0 0" >> /etc/fstab
+  echo "${OLDPARTITION} /${OLDPART} ext4 defaults 0 0" >> /etc/fstab
   mount -a
 )
 
@@ -28,7 +30,7 @@ chmod 755 /root
 restore() {
   DIR=`dirname "${1}"`
   sudo -u ywsing mkdir -p "${DIR}"
-  cp -a -r "/mnt${1}" "${DIR}"
+  cp -a -r "/${OLDPART}${1}" "${DIR}"
 }
 
 restore /opt/madedit
@@ -192,7 +194,7 @@ apt-get -y autoremove --purge
 
 # replaces ssh host keys
 service ssh stop
-cp /mnt/etc/ssh/* /etc/ssh # uses the old keys
+cp /${OLDPART}/etc/ssh/* /etc/ssh # uses the old keys
 service ssh start
 
 # change the wqy font configuration to allow local .fonts.conf in user directory

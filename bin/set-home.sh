@@ -11,9 +11,9 @@ runIfNotThere() {
 		echo "To run $1..."
 
 		(
-			if [ "$1" = "firefox" ]; then
-				ulimit -v 1536000
-			fi
+#			if [ "$1" = "firefox" ]; then
+#				ulimit -v 1536000
+#			fi
 			nohup $* > /dev/null
 		) &
 	fi
@@ -35,6 +35,7 @@ ctl.!default {
 # END set sound
 
 runIfNotThere chromium --force-device-scale-factor=2 --high-dpi-support=1 --incognito https://www.facebook.com/ http://finance.yahoo.com/ https://www.youtube.com/ file:///data/storey file:///home/ywsing/docs
+#runIfNotThere ~/eclipse/eclipse -data ~/workspace
 runIfNotThere evince
 runIfNotThere firefox
 runIfNotThere pcmanfm ~/docs/
@@ -44,7 +45,7 @@ runIfNotThere tint2
 runIfNotThere terminator -m
 runIfNotThere xfce4-clipman
 runIfNotThere yeahconsole
-(export GTK2_RC_FILES=~/.tight-gtkrc-2.0 && export SWT_GTK3=0 && runIfNotThere ~/eclipse/eclipse -data ~/workspace)
+(GTK2_RC_FILES=~/.tight-gtkrc-2.0 GTK_IM_MODULE= SWT_GTK3=0 runIfNotThere ~/eclipse/eclipse -data ~/workspace)
 
 #runIfNotThere /opt/idea-IC-129.451/bin/idea.sh
 #runIfNotThere minitube

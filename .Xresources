@@ -1,11 +1,11 @@
 URxvt.background:			[95]#000000
 !URxvt.font:					10x20
-URxvt.font:					xft:PT Mono
+URxvt.font:					xft:monospace
 URxvt.foreground:			[95]#AAAAAA
 URxvt.scrollBar:			false
 Xft.dpi:					180
 yeahconsole*aniDelay:		40
-yeahconsole*consoleHeight:	40
+yeahconsole*consoleHeight:	32
 yeahconsole*restart:		1
 yeahconsole*screenWidth:	1920
 yeahconsole*stepSize:		0

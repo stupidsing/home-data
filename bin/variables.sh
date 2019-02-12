@@ -1,5 +1,6 @@
 export GDK_SCALE=2
-#export GDK_DPI_SCALE=0.5
+export GDK_DPI_SCALE=0.5
+
 export GRADLE_HOME=$(find ~/ -maxdepth 1 -name gradle-\* | sort | tail -1)
 export JAVA_HOME=$(find /usr/lib/jvm/ -maxdepth 1 -name java-11-\* | sort | tail -1)
 export M2_HOME=$(find ~/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)

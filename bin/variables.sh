@@ -34,11 +34,12 @@ format() {
 		import sys
 		indent = 0
 		for line in sys.stdin.readlines():
-			first, last = line[:1], line.strip()[-1:]
-			if first in [']', '}']: indent = indent - 1
-			sys.stdout.write(indent * '  ')
-			if last in ['[', '{']: indent = indent + 1
-			sys.stdout.write(line)
+			if len(line) != 1:
+				first, last = line[:1], line.strip()[-1:]
+				if first in [']', '}']: indent = indent - 1
+				sys.stdout.write(indent * '  ')
+				if last in ['[', '{']: indent = indent + 1
+				sys.stdout.write(line)
 	"
 }
 

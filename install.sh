@@ -162,7 +162,7 @@ apt-get -y dist-upgrade && (
     terminator thunderbird \
     tint2 torcs ttf-wqy-zenhei \
     vim virtualbox \
-    w3m wine wmctrl \
+    w3m wine wkhtmltopdf wmctrl \
     xchm xclip xinput xscavenger \
     yeahconsole \
     zip \

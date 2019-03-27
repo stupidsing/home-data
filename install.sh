@@ -153,7 +153,7 @@ apt-get -y dist-upgrade && (
     fontforge \
     g++ gcin gconf-editor gdb git-core gnome-tweak-tool gnugo gnumeric gparted gpicview graphviz \
     imagemagick \
-    leafpad libreadline-dev \
+    lcdf-typetools leafpad libreadline-dev \
     mpg321 \
     obconf openbox openjdk-11-jdk \
     pavucontrol pcmanfm \

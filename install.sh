@@ -151,7 +151,7 @@ apt-get -y dist-upgrade && (
     catdoc chromium cifs-utils \
     deborphan dosbox \
     fontforge \
-    g++ gcin gconf-editor gdb git-core gnome-tweak-tool gnugo gnumeric gparted gpicview graphviz \
+    g++ gcin gconf-editor gdb git-core gnome-tweak-tool gnugo gnumeric gparted gpicview graphviz gthumb \
     imagemagick \
     lcdf-typetools leafpad libreadline-dev \
     mpg321 \

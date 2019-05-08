@@ -114,6 +114,7 @@ stock() {
 			done
 			;;
 		s)
+			(cd ~/home-data/ && git pull) &&
 			(cd ~/suite/ && mvn compile exec:java -Dexec.mainClass=suite.StatusMain)
 			;;
 		u)

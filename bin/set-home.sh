@@ -46,6 +46,7 @@ runIfNotThere terminator -m
 runIfNotThere xfce4-clipman
 runIfNotThere yeahconsole
 (GTK2_RC_FILES=~/.tight-gtkrc-2.0 GTK_IM_MODULE= SWT_GTK3=0 runIfNotThere ~/eclipse/eclipse -data ~/workspace)
+(GTK2_RC_FILES=~/.tight-gtkrc-2.0 GTK_IM_MODULE= SWT_GTK3=0 runIfNotThere ~/eclipse.cpp/eclipse -data ~/workspace.cpp)
 
 #runIfNotThere /opt/idea-IC-129.451/bin/idea.sh
 #runIfNotThere minitube

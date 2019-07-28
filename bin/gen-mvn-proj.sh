@@ -3,6 +3,17 @@ PKG=${PROJ}
 mkdir -p ~/${PROJ}/src/{main,test}/{java,resources}/${PKG}/
 
 (cd ~/${PROJ}/
+echo ".classpath
+.gradle
+.idea
+.project
+.settings
+bin
+build
+gradle
+target
+" > .gitignore
+
 echo "<?xml version=\"1.0\"?>
 <project>
   <modelVersion>4.0.0</modelVersion>

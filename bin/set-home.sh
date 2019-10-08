@@ -39,7 +39,7 @@ runIfNotThere chromium --force-device-scale-factor=2 --high-dpi-support=1 --inco
 runIfNotThere evince
 runIfNotThere firefox
 runIfNotThere pcmanfm ~/docs/
-runIfNotThere scite "-position.left=960" "-position.top=540" "-position.width=1920" "-position.height=1080" pad ~/home-data/stock.txt ~/bin/variables.sh
+runIfNotThere scite pad ~/home-data/stock.txt ~/bin/variables.sh
 runIfNotThere thunderbird
 runIfNotThere tint2
 runIfNotThere terminator -m

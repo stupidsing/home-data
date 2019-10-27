@@ -73,11 +73,12 @@ rsync -avz ~/home-data/bin/ ~/bin/
 (echo && echo 'source ~/bin/variables.sh') >> ~/.bashrc
 echo "set completion-ignore-case on" >> ~/.inputrc
 
-wget https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_linux-x64_bin.tar.gz
-tar zxf openjdk-13.0.1_linux-x64_bin.tar.gz
+curl -sL https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz | tar zxf -
+curl -sL https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_linux-x64_bin.tar.gz | tar zxf -
+curl -sL http://ftp.cuhk.edu.hk/pub/packages/apache.org/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz | tar zxf -
+curl -sL https://nodejs.org/dist/v13.0.1/node-v13.0.1-linux-x64.tar.xz | tar Jxf -
 
-wget http://ftp.cuhk.edu.hk/pub/packages/apache.org/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz
-tar zxf apache-maven-3.6.2-bin.tar.gz
+mv go/ goroot/
 
 git clone git@github.com:stupidsing/home-data.git
 git clone git@github.com:stupidsing/pieces.git

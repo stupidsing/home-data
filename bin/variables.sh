@@ -16,7 +16,8 @@ format() {
 				if c == chr(39): quote = 1 - quote
 				if c == chr(34): quote = 2 - quote
 				if quote == 0 and c in [']', '}']: nl()
-				if quote != 0 or c != ' ': sys.stdout.write(c)
+				#if quote != 0 or c != ' ':
+				sys.stdout.write(c)
 				if quote == 0 and c in ['[', '{', ',']: nl()
 				pc = c
 	" | python -c "if 1:

@@ -114,13 +114,6 @@ sudo chmod 755 /etc/cron.daily/apt-security
 ################################################################################
 echo '0 2 * * * /home/ywsing/daily.sh' | crontab -
 
-echo '#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-i386/jre
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
-export M2_HOME=$(find ${HOME}/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
-export PATH=${M2_HOME}/bin:${HOME}/bin:${PATH}
-export HISTCONTROL=erasedups:ignoreboth
-' > ${HOME}/bin/variables.sh
-
 echo '#!/bin/bash
 
 HOME='${HOME}'

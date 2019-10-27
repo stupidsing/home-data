@@ -17,7 +17,7 @@ catdoc cmake \
 deborphan \
 g++ gdb git \
 imagemagick \
-libreadline-dev \
+libc6-i386 libreadline-dev \
 mediawiki mariadb-server \
 rlwrap rsync \
 ssh sshfs \

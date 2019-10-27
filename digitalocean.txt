@@ -19,11 +19,18 @@ g++ gdb git \
 imagemagick \
 libc6-i386 libreadline-dev \
 mediawiki mariadb-server \
+netcat \
 rlwrap rsync \
 ssh sshfs \
 vim \
 w3m wkhtmltopdf \
 zip
+
+echo "
+ProxyPreserveHost On
+ProxyPass /ywsing http://127.0.0.1:8051/
+ProxyPassReverse /ywsing http://127.0.0.1:8051/
+" >> /etc/apache2/sites-enabled/000-default.conf
 
 wget https://dl.eff.org/certbot-auto
 mv certbot-auto /usr/local/sbin/certbot-auto
@@ -53,13 +60,6 @@ sudo add-apt-repository \
 sudo apt-get update
 sudo apt-get install docker-ce
 sudo usermod -aG docker ywsing
-
-################################################################################
-# BEGIN add to /etc/apache2/sites-enabled/000-default.conf
-ProxyPreserveHost On
-ProxyPass /ywsing http://127.0.0.1:8051/
-ProxyPassReverse /ywsing http://127.0.0.1:8051/
-# END add to /etc/apache2/sites-enabled/000-default.conf
 
 ################################################################################
 service apache2 restart

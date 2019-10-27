@@ -6,7 +6,7 @@ export GRADLE_HOME=$(find ~/ -maxdepth 1 -name gradle-\* | sort | tail -1)
 export JAVA_HOME=$(find ~/ -maxdepth 1 -name jdk-\* | sort | tail -1)
 export M2_HOME=$(find ~/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
 export NODE_HOME=$(find ~/ -maxdepth 1 -name node-\* | sort | tail -1)
-export PATH=/opt/go_appengine:${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${HOME}/bin:${PATH}
+export PATH=${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${HOME}/bin:${PATH}
 
 format() {
 	python -c "if 1:

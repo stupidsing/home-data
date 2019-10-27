@@ -2,9 +2,10 @@ export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
 export GRADLE_HOME=$(find ~/ -maxdepth 1 -name gradle-\* | sort | tail -1)
-export JAVA_HOME=$(find /usr/lib/jvm/ -maxdepth 1 -name java-12-\* | sort | tail -1)
+export JAVA_HOME=$(find ~/ -maxdepth 1 -name jdk-\* | sort | tail -1)
 export M2_HOME=$(find ~/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
-export PATH=/opt/go_appengine:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${HOME}/bin:${PATH}
+export NODE_HOME=$(find ~/ -maxdepth 1 -name node-\* | sort | tail -1)
+export PATH=/opt/go_appengine:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:~/${NODE_HOME}/bin:${HOME}/bin:${PATH}
 
 format() {
 	python -c "if 1:
@@ -147,6 +148,8 @@ suite() {
 
 PS1='[\t ($?)] '
 PROMPT_COMMAND='echo -en "\e]2;${PWD/\/home\/ywsing/\~}\a"'
+alias gd="git diff --no-prefix"
+alias gs="git status; git stash list"
 alias pk="pkill -f"
 alias s="wmctrl -a"
 HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}

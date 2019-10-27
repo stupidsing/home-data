@@ -1,31 +1,103 @@
 ################################################################################
-sudo adduser ywsing
-sudo su - ywsing
-
-sudo mv /etc/ufw/before.rules /etc/ufw/before.rules0
-
-(
-echo '*nat
-:PREROUTING ACCEPT [0:0]
--A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8051
-COMMIT
-'
-sudo cat /etc/ufw/before.rules0
-) > /etc/ufw/before.rules
-
-sudo ufw allow 22/tcp
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw allow 8051/tcp
-sudo ufw enable
+# apply domain.com, add pointless.online
+# apply digitalocean.com, add droplet
 
 ################################################################################
-sudo add-apt-repository -y ppa:webupd8team/java
-sudo apt update
-sudo apt dist-upgrade
-sudo apt install -y --no-install-recommends build-essential git imagemagick libapache2-mod-proxy-html libxml2-dev mediawiki mediawiki-extensions-math mediawiki-math mysql-server openjdk-8-jdk oracle-java8-installer php5-gd rlwrap
-#sudo apt install -y --no-install-recommends openjdk-8-jdk
+ssh root@pointless.online
+adduser ywsing
+su - ywsing
+mkdir -p .ssh/
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0j4YiuqMuzHfZcky126ugmJyj6VaeEH8F65P/4PYm4kztUqdEq06VIBvfVIxSBR5gk1UQbeuohGkDf7EsJYeTjF3tWZUqn8V9U13HkeOGlgeGTYoGK8jJRWyB3DeSuhC+4FvNLNhqvrdPoCGeiK/LscSaxtxBEUuFhY4duH+puRX9gRLg7WFHHqtOq7Ltp9Vobd3UC+n02qbToPnF8JerDQ6kqzpfuH+swWcxq7Zw89UgWjIL5Yia331H4xOFAAJPYo2BS4/0X+7M5jZYraReEH9dpO420HZ3kXbK1Wkh4RFw4wSyF5BMR5/Rq6ituUAxNd0d62qwrZmt12DKQi0QQ== ywsing@sing8" > ~/.ssh/authorized_keys
+usermod -aG sudo ywsing
+sed "s/PasswordAuthentication no/PasswordAuthentication yes/g" -i /etc/ssh/sshd_config
 
+apt -y --no-install-recommends install \
+build-essential \
+catdoc cmake \
+deborphan \
+g++ gdb git \
+imagemagick \
+libreadline-dev \
+mediawiki mariadb-server \
+rlwrap rsync \
+ssh sshfs \
+vim \
+w3m wkhtmltopdf \
+zip
+
+wget https://dl.eff.org/certbot-auto
+mv certbot-auto /usr/local/sbin/certbot-auto
+chmod 755 /usr/local/sbin/certbot-auto
+certbot-auto --apache -d pointless.online
+
+echo '/usr/local/sbin/certbot-auto renew >> /var/log/le-renew.log' > /etc/cron.weekly/certbot-auto
+chmod 755 /etc/cron.weekly/certbot-auto
+
+echo "use mysql;
+create user mediawiki identified by 'mwmusdin';
+grant all privileges on *.* to 'mediawiki'@'%' ;
+" | mysql -u root
+
+a2enmod mediawiki proxy proxy_ajp proxy_http rewrite deflate headers proxy_balancer proxy_connect proxy_html
+
+# install docker
+sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+
+curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
+
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   $(lsb_release -cs) \
+   stable"
+
+sudo apt-get update
+sudo apt-get install docker-ce
+sudo usermod -aG docker ywsing
+
+################################################################################
+# BEGIN add to /etc/apache2/sites-enabled/000-default.conf
+ProxyPreserveHost On
+ProxyPass /ywsing http://127.0.0.1:8051/
+ProxyPassReverse /ywsing http://127.0.0.1:8051/
+# END add to /etc/apache2/sites-enabled/000-default.conf
+
+################################################################################
+service apache2 restart
+service ssh restart
+su - ywsing
+
+git config --global user.email stupidsing@gmail.com
+git config --global user.name stupidsing
+
+rsync -avz ~/home-data/bin/ ~/bin/
+(echo && echo 'source ~/bin/variables.sh') >> ~/.bashrc
+echo "set completion-ignore-case on" >> ~/.inputrc
+
+wget https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_linux-x64_bin.tar.gz
+tar zxf openjdk-13.0.1_linux-x64_bin.tar.gz
+
+wget http://ftp.cuhk.edu.hk/pub/packages/apache.org/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz
+tar zxf apache-maven-3.6.2-bin.tar.gz
+
+git clone git@github.com:stupidsing/home-data.git
+git clone git@github.com:stupidsing/pieces.git
+git clone git@github.com:stupidsing/primal.git
+git clone git@github.com:stupidsing/suite.git
+
+(cd primal/ && mvn install) && suite/run.sh
+
+sudo mkdir -p /var/www/html/m2_repo/
+sudo rsync -avz ~/.m2/repository/primal/ /var/www/html/m2_repo/primal/
+sudo rsync -avz ~/.m2/repository/suite/ /var/www/html/m2_repo/suite/
+
+docker run hello-world
+
+################################################################################
+firefox https://pointless.online/mediawiki/mw-config/index.php
+# database account mediawiki:mwmusdin
+# generate LocalSettings.php and copy to /etc/mediawiki/LocalSettings.php
+
+################################################################################
 echo 'apt update
 apt \
     -o quiet=1 \
@@ -38,43 +110,8 @@ shutdown -r +1
 ' | sudo tee /etc/cron.daily/apt-security
 sudo chmod 755 /etc/cron.daily/apt-security
 
-sudo init 6
-
 ################################################################################
-wget https://dl.eff.org/certbot-auto
-sudo mv certbot-auto /usr/local/sbin/certbot-auto
-sudo chmod 755 /usr/local/sbin/certbot-auto
-certbot-auto --apache -d pointless.online
-
-sudo a2enmod mediawiki proxy proxy_ajp proxy_http rewrite deflate headers proxy_balancer proxy_connect proxy_html
-
-sudo sed 's/#Alias/Alias/g' -i /etc/mediawiki/apache.conf
-
-sudo service apache2 restart
-
-echo '/usr/local/sbin/certbot-auto renew >> /var/log/le-renew.log' | sudo tee /etc/cron.weekly/certbot-auto
-sudo chmod 755 /etc/cron.weekly/certbot-auto
-
-# BEGIN add to /etc/apache2/sites-enabled/000-default.conf
-#ProxyPreserveHost On
-#ProxyPass /ywsing http://127.0.0.1:8051/
-#ProxyPassReverse /ywsing http://127.0.0.1:8051/
-# END add to /etc/apache2/sites-enabled/000-default.conf
-
-firefox https://pointless.online/mediawiki/
-mediawiki/xxx
-
-################################################################################
-ssh-keygen -t rsa
-
-git clone https://github.com/stupidsing/suite.git
-
 echo '0 2 * * * /home/ywsing/daily.sh' | crontab -
-
-wget -O - http://ftp.cuhk.edu.hk/pub/packages/apache.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar zxf -
-
-echo '. ~/bin/variables.sh' > ${HOME}/.bashrc
-echo "set completion-ignore-case on" >> ~/.inputrc
 
 echo '#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-i386/jre
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre

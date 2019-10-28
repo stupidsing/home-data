@@ -80,6 +80,10 @@ curl -sL https://nodejs.org/dist/v13.0.1/node-v13.0.1-linux-x64.tar.xz | tar Jxf
 
 mv go/ goroot/
 
+. ~/bin/variables.sh
+curl -sL http://www1.ecert.gov.hk/root/root_ca_1_pem.crt > /tmp/root_ca_1_pem.crt
+keytool -import -trustcacerts -keystore ${JAVA_HOME}/lib/security/cacerts -storepass changeit -alias hong_kong_post_root -file /tmp/root_ca_1_pem.crt
+
 git clone git@github.com:stupidsing/home-data.git
 git clone git@github.com:stupidsing/pieces.git
 git clone git@github.com:stupidsing/primal.git

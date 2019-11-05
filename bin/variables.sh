@@ -141,6 +141,18 @@ stock() {
 	fi
 }
 
+sc() {
+	CMD="${1}"
+	MD5=$(echo "${CMD}" | md5sum - | cut -d' ' -f1)
+	DIR=~/.cmd-cache/${MD5:0:2}
+	F=${DIR}/${MD5}.d
+	if [ -f "${F}" ]; then
+		sh ${CMD} | tee "${F}"
+	else
+		cat "${F}"
+	fi
+}
+
 suite() {
 	MAINCLASS=${1}
 	shift

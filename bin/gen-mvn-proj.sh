@@ -1,6 +1,7 @@
 PROJ=${1-skel}
-PKG=${PROJ}
-mkdir -p ~/${PROJ}/src/{main,test}/{java,resources}/${PKG}/
+PKG=$(echo ${PROJ} | sed s#-#.#g)
+PKGP=$(echo ${PROJ} | sed s#-#/#g)
+mkdir -p ~/${PROJ}/src/{main,test}/{java,resources}/${PKGP}/
 
 (cd ~/${PROJ}/
 echo ".classpath
@@ -69,7 +70,7 @@ public static void main(String[] args) {
 }
 
 }
-" | sed "s/\${PROJ}/${PROJ}/g" > src/main/java/${PKG}/Main.java
+" | sed "s/\${PROJ}/${PROJ}/g" > src/main/java/${PKGP}/Main.java
 
 echo "package ${PKG};
 
@@ -82,7 +83,7 @@ public void test() {
 }
 
 }
-" > src/test/java/${PKG}/UnitTest.java
+" > src/test/java/${PKGP}/UnitTest.java
 
 mvn eclipse:clean eclipse:eclipse install assembly:single
 )

@@ -157,7 +157,7 @@ apt-get -y dist-upgrade && (
     lcdf-typetools leafpad libreadline-dev \
     mpg321 \
     obconf openbox openjdk-11-jdk \
-    pavucontrol pcmanfm \
+    pavucontrol pcmanfm poppler-utils \
     rlwrap rsync rxvt-unicode \
     scite ssh sshfs subversion supertux \
     terminator thunderbird \

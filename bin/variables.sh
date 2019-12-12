@@ -8,6 +8,19 @@ export M2_HOME=$(find ~/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
 export NODE_HOME=$(find ~/ -maxdepth 1 -name node-\* | sort | tail -1)
 export PATH=${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${HOME}/bin:${PATH}
 
+diff-from-last() {
+	while [ "${1}" ]; do
+		F=${1}
+		shift
+		FS=/tmp/${F}.last_size
+		[ -f ${FS} ] && SIZE0=$(cat ${FS}) || SIZE0=0
+		SIZE1=$(stat -c %s ${F})
+		[ ${SIZE0} -le ${SIZE1} ] || SIZE0=0
+		dd status=none if=${F} bs=1 skip=${SIZE0} count=$((${SIZE1} - ${SIZE0}))
+		printf ${SIZE1} > ${FS}
+	done
+}
+
 format() {
 	python -c "if 1:
 		import sys

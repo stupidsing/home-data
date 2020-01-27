@@ -1,5 +1,6 @@
 {
     "workbench.editor.enablePreview": false,
     "window.zoomLevel": 0,
-    "editor.fontFamily": "'Monospac821 BT', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'"
+    "editor.fontFamily": "'Monospac821 BT', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.autoIndent": "keep",
 }

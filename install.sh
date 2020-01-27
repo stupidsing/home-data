@@ -156,7 +156,7 @@ apt-get -y dist-upgrade && (
     keepassxc \
     lcdf-typetools leafpad libreadline-dev \
     mpg321 \
-    obconf openbox openjdk-11-jdk \
+    obconf openbox openjdk-11-jdk openvpn \
     pavucontrol pcmanfm poppler-utils \
     rlwrap rsync rxvt-unicode \
     scite ssh sshfs subversion supertux \
@@ -204,6 +204,8 @@ WQYFONTCONFIG=/etc/fonts/conf.avail/44-wqy-zenhei.conf
     sed -i 's/<alias>/<!--alias>/g' ${WQYFONTCONFIG}
     sed -i 's/<\/alias>/<\/alias-->/g' ${WQYFONTCONFIG}
 )
+
+systemctl disable openvpn
 
 # disables sleep button
 # sed -i s/^event=/#event=/ /etc/acpi/events/sleepbtn

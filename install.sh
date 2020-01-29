@@ -59,6 +59,10 @@ rmmod snd_pcsp
 # auto-login
 sed "s/#autologin-user=/autologin-user=ywsing/g"  -i /etc/lightdm/lightdm.conf
 
+# sudo
+echo "${USER} ALL=(ALL) NOPASSWD:ALL" | tee /etc/sudoers.d/it_dog > /dev/null
+chmod 440 /etc/sudoers.d/it_dog
+
 ################################################################################
 # User profile setup
 restoreHome() {

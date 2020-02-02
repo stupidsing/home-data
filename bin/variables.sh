@@ -1,6 +1,8 @@
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
+export ECLIPSE_HOME=~/eclipse
+export ECLIPSE_CPP_HOME=~/eclipse.cpp
 export GOROOT=$(find ~/ -maxdepth 1 -name goroot\* | sort | tail -1)
 export GRADLE_HOME=$(find ~/ -maxdepth 1 -name gradle-\* | sort | tail -1)
 export JAVA_HOME=$(find ~/ -maxdepth 1 -name jdk-\* | sort | tail -1)

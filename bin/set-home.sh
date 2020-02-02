@@ -34,8 +34,7 @@ ctl.!default {
 "> ~/.asoundrc
 # END set sound
 
-runIfNotThere chromium --force-device-scale-factor=2 --high-dpi-support=1 --incognito https://www.facebook.com/ http://finance.yahoo.com/ https://www.youtube.com/ file:///data/storey file:///home/ywsing/docs
-#runIfNotThere ~/eclipse/eclipse -data ~/workspace
+runIfNotThere chromium --force-device-scale-factor=2 --high-dpi-support=1 --incognito http://finance.yahoo.com/ https://www.youtube.com/ file:///data/storey file:///home/ywsing/docs
 runIfNotThere evince
 runIfNotThere firefox
 runIfNotThere pcmanfm ~/docs/
@@ -45,8 +44,7 @@ runIfNotThere tint2
 runIfNotThere terminator -m
 runIfNotThere xfce4-clipman
 runIfNotThere yeahconsole
-(GTK2_RC_FILES=~/.tight-gtkrc-2.0 GTK_IM_MODULE= SWT_GTK3=0 runIfNotThere ~/eclipse/eclipse -data ~/workspace)
-(GTK2_RC_FILES=~/.tight-gtkrc-2.0 GTK_IM_MODULE= SWT_GTK3=0 runIfNotThere ~/eclipse.cpp/eclipse -data ~/workspace.cpp)
+(GTK2_RC_FILES=~/.tight-gtkrc-2.0 GTK_IM_MODULE= SWT_GTK3=0 runIfNotThere ${ECLIPSE_HOME}/eclipse -data ~/workspace)
 
 #runIfNotThere /opt/idea-IC-129.451/bin/idea.sh
 #runIfNotThere minitube
@@ -54,5 +52,6 @@ runIfNotThere yeahconsole
 #runIfNotThere tilda
 #runIfNotThere wifi.sh
 #runIfNotThere xcompmgr -cfF -t-9 -l-11 -r9 -o.95 -D6
+#(GTK2_RC_FILES=~/.tight-gtkrc-2.0 GTK_IM_MODULE= SWT_GTK3=0 runIfNotThere ${ECLIPSE_CPP_HOME}/eclipse -data ~/workspace.cpp)
 
 sleep 2

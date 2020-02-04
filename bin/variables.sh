@@ -10,7 +10,7 @@ export M2_HOME=$(find ~/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
 export NODE_HOME=$(find ~/ -maxdepth 1 -name node-\* | sort | tail -1)
 export PATH=${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${HOME}/bin:${PATH}
 
-diff-from-last() {
+diffFromLast() {
 	while [ "${1}" ]; do
 		F=${1}
 		shift

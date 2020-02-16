@@ -26,9 +26,9 @@ echo "<?xml version=\"1.0\"?>
     <dependency><groupId>com.fasterxml.jackson.core</groupId><artifactId>jackson-databind</artifactId><version>LATEST</version></dependency>
     <dependency><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId><version>LATEST</version></dependency>
     <dependency><groupId>javax.mail</groupId><artifactId>mail</artifactId><version>LATEST</version></dependency>
-    <dependency><groupId>junit</groupId><artifactId>junit</artifactId><version>LATEST</version></dependency>
     <dependency><groupId>log4j</groupId><artifactId>log4j</artifactId><version>LATEST</version></dependency>
     <dependency><groupId>org.apache.httpcomponents</groupId><artifactId>httpclient</artifactId><version>LATEST</version></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter-engine</artifactId><version>LATEST</version></dependency>
   </dependencies>
   <build>
     <resources>
@@ -74,7 +74,7 @@ public static void main(String[] args) {
 
 echo "package ${PKG};
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class UnitTest {
 

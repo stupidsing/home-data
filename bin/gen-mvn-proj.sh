@@ -46,8 +46,8 @@ echo "<?xml version=\"1.0\"?>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
           <encoding>UTF-8</encoding>
-          <source>12</source>
-          <target>12</target>
+          <source>14</source>
+          <target>14</target>
         </configuration>
       </plugin>
     </plugins>

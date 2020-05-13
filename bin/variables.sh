@@ -61,6 +61,10 @@ format() {
 	"
 }
 
+hr() {
+	printf '%0*d\n\n' $(tput cols) | tr 0 ${1:-_}
+}
+
 replace() {
 	#CMD="sed 's/abc/def/g'"
 	CMD="${1}"

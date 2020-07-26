@@ -1,5 +1,6 @@
 {
     "editor.autoIndent": "keep",
+    "editor.find.autoFindInSelection": "multiline",
     "editor.fontFamily": "'Monospac821 BT', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.selectionClipboard": false,
     "window.zoomLevel": 0,

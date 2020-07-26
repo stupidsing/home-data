@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATH=/bin:/usr/bin:$PATH
+PATH=/bin:/usr/bin:${PATH}
 
 . ~/bin/variables.sh
 export JAVA_HOME

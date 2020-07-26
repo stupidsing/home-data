@@ -168,7 +168,7 @@ apt-get -y dist-upgrade && (
     tint2 torcs ttf-wqy-zenhei \
     vim virtualbox \
     w3m wine wkhtmltopdf wmctrl \
-    xchm xclip xinput xscavenger \
+    xchm xclip xfce4-clipman xinput xscavenger \
     yeahconsole \
     zip \
   ||

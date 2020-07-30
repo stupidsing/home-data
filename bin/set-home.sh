@@ -25,8 +25,8 @@ runIfNotThere lxpanel
 runIfNotThere pcmanfm ~/docs/
 runIfNotThere scite pad ~/home-data/stock.txt ~/bin/variables.sh
 runIfNotThere thunderbird
-runIfNotThere /usr/bin/x-terminal-emulator -m
 runIfNotThere xfce4-clipman
+runIfNotThere /usr/bin/x-terminal-emulator -m
 runIfNotThere yeahconsole
 runIfNotThere ${ECLIPSE_HOME}/eclipse -data ~/workspace
 

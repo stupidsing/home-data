@@ -3,6 +3,7 @@
     "editor.find.autoFindInSelection": "multiline",
     "editor.fontFamily": "'Monospac821 BT', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.selectionClipboard": false,
+    "window.restoreWindows": "none",
     "window.zoomLevel": 0,
     "workbench.editor.enablePreview": false,
 }

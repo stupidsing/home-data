@@ -156,11 +156,11 @@ apt-get -y dist-upgrade && (
     deborphan dosbox \
     fontforge \
     g++ gcin gconf-editor gdb git-core gnome-tweak-tool gnugo gnumeric gparted gpicview graphviz gthumb \
-    imagemagick \
+    i3lock imagemagick \
     keepassxc \
     lcdf-typetools leafpad libreadline-dev \
     mpg321 \
-    obconf openbox openjdk-11-jdk openvpn \
+    obconf openbox openjdk-14-jdk openvpn \
     pavucontrol pcmanfm poppler-utils \
     rlwrap rsync rxvt-unicode \
     scite ssh sshfs subversion supertux \

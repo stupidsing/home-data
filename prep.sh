@@ -48,6 +48,6 @@ yeahconsole*toggleKey:		+F1
 yeahconsole*xOffset:		420
 " > ${HOME}/.Xresources
 
-printf "xset r rate 200 56
+printf "xset r rate 200 32
 xinput --set-prop 'USB OPTICAL MOUSE ' 'libinput Accel Speed' 1
 " > ${HOME}/.xsessionrc

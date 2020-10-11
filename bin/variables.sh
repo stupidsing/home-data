@@ -1,16 +1,16 @@
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
-export ECLIPSE_HOME=~/eclipse
-export ECLIPSE_CPP_HOME=~/eclipse.cpp
+export ECLIPSE_HOME=/data/tmp/d1f7c3cc.http___ftp.jaist.ac.jp_pub_eclipse_technology_epp_downloads_release_2020-09_R_eclipse-java-2020-09-R-linux-gtk-x86_64.tar.gz.d/eclipse
+export ECLIPSE_CPP_HOME=/data/tmp/d09be002.http___ftp.jaist.ac.jp_pub_eclipse_technology_epp_downloads_release_2020-03_R_eclipse-cpp-2020-03-R-incubation-linux-gtk-x86_64.tar.gz.d/eclipse
 export GOROOT=$(find ~/ -maxdepth 1 -name goroot\* | sort | tail -1)
 export GRADLE_HOME=$(find ~/ -maxdepth 1 -name gradle-\* | sort | tail -1)
-export JAVA_HOME=$(find ~/ -maxdepth 1 -name jdk-\* | sort | tail -1)
-export M2_HOME=$(find ~/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
-export NODE_HOME=$(find ~/ -maxdepth 1 -name node-\* | sort | tail -1)
-export PATH=${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${HOME}/bin:${PATH}
+export JAVA_HOME=/data/tmp/4b8e20f3.https___download.java.net_java_GA_jdk15_779bf45e88a44cbd9ea6621d33e33db1_36_GPL_openjdk-15_linux-x64_bin.tar.gz.d/jdk-15
+export M2_HOME=/data/tmp/4ba3d3f0.http___ftp.cuhk.edu.hk_pub_packages_apache.org_maven_maven-3_3.6.3_binaries_apache-maven-3.6.3-bin.tar.gz.d/apache-maven-3.6.3
+export NODE_HOME=/data/tmp/db28c4cb.https___nodejs.org_dist_v12.16.2_node-v12.16.2-linux-x64.tar.xz.d/node-v12.16.2-linux-x64
+export PATH=${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:~/home-data/bin:~/bin:${PATH}
 
-chbranch() {
+choverlay() {
 	# tp_apt_i fuse_overlayfs
 	L0=${PWD}
 	L1=$(mktemp -d)
@@ -26,7 +26,7 @@ chbranch() {
 	pushd ${L1}/
 }
 
-chbranchx() {
+choverlayx() {
 	L=${PWD}
 	NAME=$(echo "${L}" | sed s#/#_#g)
 	popd

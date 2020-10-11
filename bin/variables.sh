@@ -12,6 +12,7 @@ export PATH=${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${N
 
 choverlay() {
 	if [ "${1}" == "-s" ]; then
+		# use superuser mounter
 		local SUDO=true
 		shift
 	fi

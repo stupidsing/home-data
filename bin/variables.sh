@@ -31,6 +31,10 @@ chbranchx() {
 	sudo umount ${L}
 }
 
+chinese() {
+	(cd ~/suite/ && java -cp $(cat target/classpath):target/suite-1.0.jar suite.text.Chinese)
+}
+
 diffFromLast() {
 	while [ "${1}" ]; do
 		F=${1}

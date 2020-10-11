@@ -11,27 +11,45 @@ export NODE_HOME=/data/tmp/db28c4cb.https___nodejs.org_dist_v12.16.2_node-v12.16
 export PATH=${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:~/home-data/bin:~/bin:${PATH}
 
 choverlay() {
+	if [ "${1}" == "-s" ]; then
+		local SUDO=true
+		shift
+	fi
+
 	# tp_apt_i fuse_overlayfs
-	L0=${PWD}
-	L1=$(mktemp -d)
-	UPPERDIR=$(mktemp -d)
-	NAME0=$(echo "${L0}" | sed s#/#_#g)
-	NAME1=$(echo "${L1}" | sed s#/#_#g)
-	METAFILE0=/tmp/chbranch.${NAME0}
-	METAFILE1=/tmp/chbranch.${NAME1}
-	[ -f "${METAFILE0}" ] && LDS0=$(cat ${METAFILE0}) || LDS0=${L0}
-	LDS1=${LDS0}:${UPPERDIR}
+	local L0=${1-$(pwd)}
+	local L1=$(mktemp -d)
+	local UPPERDIR=$(mktemp -d)
+	local NAME0=$(echo "${L0}" | sed s#/#_#g)
+	local NAME1=$(echo "${L1}" | sed s#/#_#g)
+	local METAFILE0=/tmp/choverlay.${NAME0}
+	local METAFILE1=/tmp/choverlay.${NAME1}
+	[ -f "${METAFILE0}" ] && local LDS0=$(cat ${METAFILE0}) || local LDS0=${L0}
+	local LDS1=${LDS0}:${UPPERDIR}
 	echo ${LDS1} > ${METAFILE1}
-	fuse-overlayfs -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d)  ${L1}
+	if [ "${SUDO}" ]; then
+		sudo mount -t overlay stack_${NAME1} -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d) ${L1}
+	else
+		fuse-overlayfs -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d)  ${L1}
+	fi
 	pushd ${L1}/
 }
 
 choverlayx() {
-	L=${PWD}
-	NAME=$(echo "${L}" | sed s#/#_#g)
+	if [ "${1}" == "-s" ]; then
+		local SUDO=true
+		shift
+	fi
+
+	local L=${PWD}
+	local NAME=$(echo "${L}" | sed s#/#_#g)
 	popd
-	sudo fusermount -u ${L}
-	rm /tmp/chbranch.${NAME}
+	if [ "${SUDO}" ]; then
+		sudo umount ${L}
+	else
+		sudo fusermount -u ${L}
+	fi
+	rm /tmp/choverlayx.${NAME}
 }
 
 chinese() {
@@ -40,11 +58,11 @@ chinese() {
 
 diffFromLast() {
 	while [ "${1}" ]; do
-		F=${1}
+		local F=${1}
 		shift
-		FS=/tmp/${F}.last_size
+		local FS=/tmp/${F}.last_size
 		[ -f ${FS} ] && SIZE0=$(cat ${FS}) || SIZE0=0
-		SIZE1=$(stat -c %s ${F})
+		local SIZE1=$(stat -c %s ${F})
 		[ ${SIZE0} -le ${SIZE1} ] || SIZE0=0
 		dd status=none if=${F} bs=1 skip=${SIZE0} count=$((${SIZE1} - ${SIZE0}))
 		printf ${SIZE1} > ${FS}
@@ -94,8 +112,8 @@ hr() {
 }
 
 replace() {
-	#CMD="sed 's/abc/def/g'"
-	CMD="${1}"
+	#local CMD="sed 's/abc/def/g'"
+	local CMD="${1}"
 	shift
 	while [ "${1}" ]; do
 		F0="${1}"
@@ -115,8 +133,8 @@ rsync2() {
 
 stock() {
 	if [ "${1}" ]; then
-		H=${1:0:1}
-		T=${1:1}
+		local H=${1:0:1}
+		local T=${1:1}
 		case "${H}" in
 		h)
 			while read S; do [ "${S}" ] && grep ${S}.HK ~/home-data/stock.txt; echo; echo; done
@@ -189,10 +207,10 @@ stock() {
 }
 
 sc() {
-	CMD="${1}"
-	MD5=$(echo "${CMD}" | md5sum - | cut -d' ' -f1)
-	DIR=~/.cmd-cache/${MD5:0:2}
-	F=${DIR}/${MD5}.d
+	local CMD="${1}"
+	local MD5=$(echo "${CMD}" | md5sum - | cut -d' ' -f1)
+	local DIR=~/.cmd-cache/${MD5:0:2}
+	local F=${DIR}/${MD5}.d
 	if [ -f "${F}" ]; then
 		sh ${CMD} | tee "${F}"
 	else
@@ -201,7 +219,7 @@ sc() {
 }
 
 suite() {
-	MAINCLASS=${1}
+	local MAINCLASS=${1}
 	shift
 	(cd ~/suite/ && mvn compile exec:java -Dexec.mainClass=${MAINCLASS} -Dexec.args="$@")
 }

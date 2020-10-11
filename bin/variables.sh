@@ -18,9 +18,11 @@ choverlay() {
 	fi
 
 	# tp_apt_i fuse_overlayfs
-	local L0=${1-$(pwd)}
-	local L1=$(mktemp -d)
-	local UPPERDIR=$(mktemp -d)
+	SUDO=${sudo} choverlay_ ${1-$(pwd)} $(mktemp -d) $(mktemp -d)
+}
+
+choverlay_() {
+	local L0=${1} UPPERDIR=${2} L1=${3}
 	local NAME0=$(echo "${L0}" | sed s#/#_#g)
 	local NAME1=$(echo "${L1}" | sed s#/#_#g)
 	local METAFILE0=/tmp/choverlay.${NAME0}

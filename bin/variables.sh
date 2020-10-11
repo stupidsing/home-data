@@ -16,8 +16,8 @@ chbranch() {
 	UPPERDIR=$(mktemp -d)
 	NAME0=$(echo "${L0}" | sed s#/#_#g)
 	NAME1=$(echo "${L1}" | sed s#/#_#g)
-	METAFILE0=/tmp/chbranch.${N0}
-	METAFILE1=/tmp/chbranch.${N1}
+	METAFILE0=/tmp/chbranch.${NAME0}
+	METAFILE1=/tmp/chbranch.${NAME1}
 	[ -f "${METAFILE0}" ] && LDS0=$(cat ${METAFILE0}) || LDS0=${L0}
 	LDS1=${LDS0}:${UPPERDIR}
 	echo ${LDS1} > ${METAFILE1}
@@ -27,8 +27,10 @@ chbranch() {
 
 chbranchx() {
 	L=${PWD}
+	NAME=$(echo "${L}" | sed s#/#_#g)
 	popd
 	sudo umount ${L}
+	rm /tmp/chbranch.${NAME}
 }
 
 chinese() {

@@ -10,6 +10,27 @@ export M2_HOME=$(find ~/ -maxdepth 1 -name apache-maven-\* | sort | tail -1)
 export NODE_HOME=$(find ~/ -maxdepth 1 -name node-\* | sort | tail -1)
 export PATH=${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${HOME}/bin:${PATH}
 
+chbranch() {
+	L0=${PWD}
+	L1=$(mktemp -d)
+	UPPERDIR=$(mktemp -d)
+	NAME0=$(echo "${L0}" | sed s#/#_#g)
+	NAME1=$(echo "${L1}" | sed s#/#_#g)
+	METAFILE0=/tmp/chbranch.$${N0}
+	METAFILE1=/tmp/chbranch.$${N1}
+	[ -f "${METAFILE0}" ] && LDS0=$(cat ${METAFILE0}) || LDS0=${L0}
+	LDS1=${LDS0}:${UPPERDIR}
+	echo ${LDS1} > ${METAFILE1}
+	sudo mount -t overlay stack_${NAME1}  -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d)  ${L1}
+	pushd ${L1}/
+}
+
+chbranchx() {
+	L=${PWD}
+	popd
+	sudo umount ${L}
+}
+
 diffFromLast() {
 	while [ "${1}" ]; do
 		F=${1}

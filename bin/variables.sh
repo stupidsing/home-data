@@ -11,6 +11,7 @@ export NODE_HOME=$(find ~/ -maxdepth 1 -name node-\* | sort | tail -1)
 export PATH=${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${HOME}/bin:${PATH}
 
 chbranch() {
+	# tp_apt_i fuse_overlayfs
 	L0=${PWD}
 	L1=$(mktemp -d)
 	UPPERDIR=$(mktemp -d)
@@ -21,7 +22,7 @@ chbranch() {
 	[ -f "${METAFILE0}" ] && LDS0=$(cat ${METAFILE0}) || LDS0=${L0}
 	LDS1=${LDS0}:${UPPERDIR}
 	echo ${LDS1} > ${METAFILE1}
-	sudo mount -t overlay stack_${NAME1}  -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d)  ${L1}
+	fuse-overlayfs -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d)  ${L1}
 	pushd ${L1}/
 }
 
@@ -29,7 +30,7 @@ chbranchx() {
 	L=${PWD}
 	NAME=$(echo "${L}" | sed s#/#_#g)
 	popd
-	sudo umount ${L}
+	sudo fusermount -u ${L}
 	rm /tmp/chbranch.${NAME}
 }
 

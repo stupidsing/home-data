@@ -209,4 +209,5 @@ alias gd="git diff --no-prefix"
 alias gs="git status; git stash list"
 alias pk="pkill -f"
 alias s="wmctrl -a"
+alias tp="source <(curl -sL https://raw.githubusercontent.com/stupidsing/suite/master/src/main/sh/tools-path.sh | bash -)"
 HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}

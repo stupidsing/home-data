@@ -64,7 +64,7 @@ choverlayx() {
 	else
 		sudo fusermount -u ${L}
 	fi
-	rm /tmp/choverlayx.${NAME}
+	rm /tmp/choverlay.${NAME}
 }
 
 diff-from-last() {

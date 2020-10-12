@@ -10,6 +10,18 @@ export M2_HOME=/data/tmp/4ba3d3f0.http___ftp.cuhk.edu.hk_pub_packages_apache.org
 export NODE_HOME=/data/tmp/db28c4cb.https___nodejs.org_dist_v12.16.2_node-v12.16.2-linux-x64.tar.xz.d/node-v12.16.2-linux-x64
 export PATH=${GOROOT}/bin:${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:~/home-data/bin:~/bin:${PATH}
 
+binary() {
+	cut -d' ' -f1 | (read L
+	while [ "${L}" != "" ]; do
+		printf "\\x${L:0:2}"
+		L="${L:2:9999}"
+	done)
+}
+
+chinese() {
+	(cd ~/suite/ && java -cp $(cat target/classpath):target/suite-1.0.jar suite.text.Chinese)
+}
+
 choverlay() {
 	if [ "${1}" == "-s" ]; then
 		# use superuser mounter
@@ -55,11 +67,7 @@ choverlayx() {
 	rm /tmp/choverlayx.${NAME}
 }
 
-chinese() {
-	(cd ~/suite/ && java -cp $(cat target/classpath):target/suite-1.0.jar suite.text.Chinese)
-}
-
-diffFromLast() {
+diff-from-last() {
 	while [ "${1}" ]; do
 		local F=${1}
 		shift
@@ -96,12 +104,12 @@ format() {
 					h, t = t[0], t[1:]
 					sys.stdout.write(h)
 				if t == '{\n}': t = '{}'
-		print t,
+		sys.stdout.write(t)
 	" | python -c "if 1:
 		import sys
 		indent = 0
 		for line in sys.stdin.readlines():
-			if len(line) != 1:
+			if line.strip():
 				first, last = line[:1], line.strip()[-1:]
 				if first in [']', '}']: indent = indent - 1
 				sys.stdout.write(indent * '  ')
@@ -114,14 +122,15 @@ hr() {
 	printf '%0*d\n\n' $(tput cols) | tr 0 ${1:-_}
 }
 
+# replace "cat | sed 's/abc/def/g'" $(find -name \*.js -type f)
 replace() {
-	#local CMD="sed 's/abc/def/g'"
+	#local CMD="cat | sed 's/abc/def/g'"
 	local CMD="${1}"
 	shift
 	while [ "${1}" ]; do
-		F0="${1}"
-		F1=$(echo "${F0}" | sh -c "${CMD}")
-		TMP="$(tempfile)"
+		local F0="${1}"
+		local F1=$(echo "${F0}" | sh -c "${CMD}")
+		local TMP="$(tempfile)"
 		cat "${F0}" | sh -c "${CMD}" > "${TMP}"
 		mkdir -p $(dirname "${F1}")
 		mv "${TMP}" "${F1}"
@@ -143,6 +152,7 @@ stock() {
 			while read S; do [ "${S}" ] && grep ${S}.HK ~/home-data/stock.txt; echo; echo; done
 			;;
 		i)
+			curl -sL https://www.sl886.com/adr | grep -A1 '<h3>恆生指數</h3>' | sed 's/.*label-danger">\(.*\)&nbsp;&nbsp;.*/\1/g' | tail -1
 			curl -s 'http://www.aastocks.com/en/mobile/Quote.aspx?symbol=5' |
 			grep -A1 HSI | tail -1 | cut -d. -f1 | python -c 'if True:
 				import sys
@@ -209,24 +219,13 @@ stock() {
 	fi
 }
 
-sc() {
-	local CMD="${1}"
-	local MD5=$(echo "${CMD}" | md5sum - | cut -d' ' -f1)
-	local DIR=~/.cmd-cache/${MD5:0:2}
-	local F=${DIR}/${MD5}.d
-	if [ -f "${F}" ]; then
-		sh ${CMD} | tee "${F}"
-	else
-		cat "${F}"
-	fi
-}
-
 suite() {
 	local MAINCLASS=${1}
 	shift
 	(cd ~/suite/ && mvn compile exec:java -Dexec.mainClass=${MAINCLASS} -Dexec.args="$@")
 }
 
+HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}
 PS1='[\t ($?)] '
 PROMPT_COMMAND='echo -en "\e]2;${PWD/\/home\/ywsing/\~}\a"'
 alias gd="git diff --no-prefix"
@@ -234,4 +233,3 @@ alias gs="git status; git stash list"
 alias pk="pkill -f"
 alias s="wmctrl -a"
 alias tp="source <(curl -sL https://raw.githubusercontent.com/stupidsing/suite/master/src/main/sh/tools-path.sh | bash -)"
-HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}

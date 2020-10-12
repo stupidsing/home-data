@@ -30,7 +30,7 @@ choverlay() {
 	fi
 
 	# tp_apt_i fuse_overlayfs
-	SUDO=${sudo} choverlay_ ${1-$(pwd)} $(mktemp -d) $(mktemp -d)
+	SUDO=${SUDO} choverlay_ ${1-$(pwd)} $(mktemp -d) $(mktemp -d)
 }
 
 choverlay_() {

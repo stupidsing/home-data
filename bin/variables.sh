@@ -35,7 +35,7 @@ choverlay_() {
 	else
 		fuse-overlayfs -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d)  ${L1}
 	fi
-	pushd ${L1}/
+	pushd ${L1}/ > /dev/null
 }
 
 choverlayx() {
@@ -46,7 +46,7 @@ choverlayx() {
 
 	local L=${PWD}
 	local NAME=$(echo "${L}" | sed s#/#_#g)
-	popd
+	popd > /dev/null
 	if [ "${SUDO}" ]; then
 		sudo umount ${L}
 	else

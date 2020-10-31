@@ -11,14 +11,14 @@ chinese() {
 }
 
 choverlay() {
-	if [ "${1}" == "-s" ]; then
+	if [ "${1}" == "-l" ]; then
 		# use superuser mounter
-		local SUDO=true
+		local LOCAL=true
 		shift
 	fi
 
 	# tp_apt_i fuse_overlayfs
-	SUDO=${SUDO} choverlay_ ${1-$(pwd)} $(mktemp -d) $(mktemp -d)
+	LOCAL=${LOCAL} choverlay_ ${1-$(pwd)} $(mktemp -d) $(mktemp -d)
 }
 
 choverlay_() {
@@ -30,27 +30,27 @@ choverlay_() {
 	[ -f "${METAFILE0}" ] && local LDS0=$(cat ${METAFILE0}) || local LDS0=${L0}
 	local LDS1=${LDS0}:${UPPERDIR}
 	echo ${LDS1} > ${METAFILE1}
-	if [ "${SUDO}" ]; then
-		sudo mount -t overlay stack_${NAME1} -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d) ${L1}
-	else
+	if [ "${LOCAL}" ]; then
 		fuse-overlayfs -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d)  ${L1}
+	else
+		sudo mount -t overlay stack_${NAME1} -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d) ${L1}
 	fi
 	pushd ${L1}/ > /dev/null
 }
 
 choverlayx() {
-	if [ "${1}" == "-s" ]; then
-		local SUDO=true
+	if [ "${1}" == "-l" ]; then
+		local LOCAL=true
 		shift
 	fi
 
 	local L=${PWD}
 	local NAME=$(echo "${L}" | sed s#/#_#g)
 	popd > /dev/null
-	if [ "${SUDO}" ]; then
-		sudo umount ${L}
-	else
+	if [ "${LOCAL}" ]; then
 		sudo fusermount -u ${L}
+	else
+		sudo umount ${L}
 	fi
 	rm /tmp/choverlay.${NAME}
 }

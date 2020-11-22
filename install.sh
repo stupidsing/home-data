@@ -162,7 +162,7 @@ apt-get -y dist-upgrade && (
     mpg321 \
     obconf openbox openjdk-14-jdk openvpn \
     pavucontrol pcmanfm poppler-utils \
-    rlwrap rsync rxvt-unicode \
+    rename rlwrap rsync rxvt-unicode \
     scite ssh sshfs subversion supertux \
     terminator thunderbird \
     tint2 torcs ttf-wqy-zenhei \

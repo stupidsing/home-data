@@ -12,7 +12,7 @@ chinese() {
 
 choverlay() {
 	if [ "${1}" == "-l" ]; then
-		# use superuser mounter
+		# use local mounter (instead of superuser)
 		local LOCAL=true
 		shift
 	fi

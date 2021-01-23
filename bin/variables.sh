@@ -31,10 +31,10 @@ choverlay_() {
 	local LDS1=${LDS0}:${UPPERDIR}
 	echo ${LDS1} > ${METAFILE1}
 	if [ "${LOCAL}" ]; then
-		fuse-overlayfs -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d)  ${L1}
+		fuse-overlayfs -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=${WORKDIR-$(mktemp -d)} ${L1}
 	else
-		echo sudo mount -t overlay stack_${NAME1} -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d) ${L1}
-		sudo mount -t overlay stack_${NAME1} -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d) ${L1}
+		echo sudo mount -t overlay stack_${NAME1} -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=${WORKDIR-$(mktemp -d)} ${L1}
+		sudo mount -t overlay stack_${NAME1} -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=${WORKDIR-$(mktemp -d)} ${L1}
 	fi
 	pushd ${L1}/ > /dev/null
 }

@@ -151,6 +151,7 @@ apt update &&
 apt-get -y dist-upgrade && (
   apt -y --force-yes --no-install-recommends install \
     abiword asunder \
+    bat \
     bochs build-essential \
     catdoc chromium cifs-utils cmake \
     deborphan dosbox \

@@ -106,6 +106,16 @@ format() {
 	"
 }
 
+fsel() {
+	D=${1-src}
+	PS3="Select a file: "
+	select F in $(find ${D}/ -type f)
+	do
+		printf ${F} | xsel -b
+		return 0
+	done
+}
+
 hr() {
 	printf '%0*d\n\n' $(tput cols) | tr 0 ${1:-_}
 }

@@ -18,6 +18,7 @@ runIfNotThere() {
 
 cd ~
 
+runIfNotThere ~/Telegram/Telegram
 runIfNotThere chromium --force-device-scale-factor=2 --high-dpi-support=1 --incognito http://finance.yahoo.com/ https://www.youtube.com/ file:///data/storey file:///home/ywsing/docs
 runIfNotThere evince
 runIfNotThere firefox

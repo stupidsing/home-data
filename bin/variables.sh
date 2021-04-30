@@ -31,9 +31,9 @@ choverlay_() {
 	local LDS1=${LDS0}:${UPPERDIR}
 	echo ${LDS1} > ${METAFILE1}
 	if [ "${LOCAL}" ]; then
-		fuse-overlayfs -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d)  ${L1}
+		fuse-overlayfs -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=${WORKDIR-$(mktemp -d)} ${L1}
 	else
-		sudo mount -t overlay stack_${NAME1} -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=$(mktemp -d) ${L1}
+		sudo mount -t overlay stack_${NAME1} -o lowerdir=${LDS0},upperdir=${UPPERDIR},workdir=${WORKDIR-$(mktemp -d)} ${L1}
 	fi
 	pushd ${L1}/ > /dev/null
 }
@@ -104,6 +104,16 @@ format() {
 				if last in ['[', '{']: indent = indent + 1
 				sys.stdout.write(line)
 	"
+}
+
+fsel() {
+	D=${1-src}
+	PS3="Select a file: "
+	select F in $(find ${D}/ -type f)
+	do
+		printf ${F} | xsel -b
+		return 0
+	done
 }
 
 hr() {

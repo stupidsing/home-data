@@ -18,12 +18,14 @@ runIfNotThere() {
 
 cd ~
 
+runIfNotThere ~/Telegram/Telegram
 runIfNotThere chromium --force-device-scale-factor=2 --high-dpi-support=1 --incognito http://finance.yahoo.com/ https://www.youtube.com/ file:///data/storey file:///home/ywsing/docs
 runIfNotThere evince
 runIfNotThere firefox
 runIfNotThere lxpanel
 runIfNotThere pcmanfm ~/docs/
-runIfNotThere scite pad ~/home-data/stock.txt ~/bin/variables.sh
+runIfNotThere scite pad ~/home-data/stock.txt ~/bin/variables.sh ~/suite/src/main/html/render.js
+runIfNotThere signal-desktop
 runIfNotThere thunderbird
 runIfNotThere xfce4-clipman
 runIfNotThere /usr/bin/x-terminal-emulator -m

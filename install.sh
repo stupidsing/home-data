@@ -154,7 +154,7 @@ apt-get -y dist-upgrade && (
     bochs build-essential \
     catdoc chromium cifs-utils cmake \
     deborphan dosbox \
-    fontforge \
+    flameshot fontforge \
     g++ gcin gconf-editor gdb git-core gnome-tweak-tool gnugo gnumeric gparted gpicview graphviz gthumb \
     i3lock imagemagick \
     keepassxc \

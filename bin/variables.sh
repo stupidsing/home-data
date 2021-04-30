@@ -216,7 +216,7 @@ suite() {
 HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}
 PS1='[\t ($?)] '
 PROMPT_COMMAND='echo -en "\e]2;${PWD/\/home\/ywsing/\~}\a"'
-alias gd="git diff --no-prefix"
+alias gd="git diff -b --no-prefix"
 alias gs="git status; git stash list"
 alias pk="pkill -f"
 alias s="wmctrl -a"

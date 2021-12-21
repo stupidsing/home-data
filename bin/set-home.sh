@@ -18,23 +18,24 @@ runIfNotThere() {
 
 cd ~
 
-runIfNotThere ~/Telegram/Telegram
-runIfNotThere chromium --force-device-scale-factor=2 --high-dpi-support=1 --incognito http://finance.yahoo.com/ https://www.youtube.com/ file:///data/storey file:///home/ywsing/docs
+# --force-device-scale-factor=2 --high-dpi-support=1
+runIfNotThere chromium --incognito http://finance.yahoo.com/ https://www.youtube.com/ file:///data/storey file:///home/ywsing/docs
+runIfNotThere ${ECLIPSE_HOME}/eclipse -data ~/workspace
 runIfNotThere evince
 runIfNotThere firefox
 runIfNotThere lxpanel
 runIfNotThere pcmanfm ~/docs/
 runIfNotThere scite pad ~/home-data/stock.txt ~/bin/variables.sh ~/suite/src/main/html/render.js
 runIfNotThere signal-desktop
-runIfNotThere thunderbird
+runIfNotThere ~/Telegram/Telegram
 runIfNotThere xfce4-clipman
 runIfNotThere /usr/bin/x-terminal-emulator -m
 runIfNotThere yeahconsole
-runIfNotThere ${ECLIPSE_HOME}/eclipse -data ~/workspace
 
 #runIfNotThere /opt/idea-IC-129.451/bin/idea.sh
 #runIfNotThere minitube
 #(export PYTHONPATH=~/terminator/install/lib/python2.7/site-packages:/usr/share/terminator && runIfNotThere ~/terminator/install/bin/terminator -m)
+#runIfNotThere thunderbird
 #runIfNotThere tilda
 #runIfNotThere tint2
 #runIfNotThere wifi.sh

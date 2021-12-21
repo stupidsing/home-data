@@ -223,7 +223,7 @@ suite() {
 	(cd ~/suite/ && mvn compile exec:java -Dexec.mainClass=${MAINCLASS} -Dexec.args="$@")
 }
 
-HISTCONTROL=erasedups:ignoreboth:${HISTCONTROL}
+HISTCONTROL=erasedups:ignoreboth:ignoredups:${HISTCONTROL}
 PS1='[\t ($?)] '
 PROMPT_COMMAND='echo -en "\e]2;${PWD/\/home\/ywsing/\~}\a"'
 alias gd="git diff -b --no-prefix"

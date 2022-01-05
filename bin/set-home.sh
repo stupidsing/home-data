@@ -29,7 +29,7 @@ runIfNotThere scite pad ~/home-data/stock.txt ~/bin/variables.sh ~/suite/src/mai
 runIfNotThere signal-desktop
 runIfNotThere ~/Telegram/Telegram
 runIfNotThere xfce4-clipman
-runIfNotThere /usr/bin/x-terminal-emulator -m
+runIfNotThere /usr/bin/x-terminal-emulator -m --title=Terminal
 runIfNotThere yeahconsole
 
 #runIfNotThere /opt/idea-IC-129.451/bin/idea.sh

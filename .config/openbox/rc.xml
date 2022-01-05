@@ -270,6 +270,11 @@
         <command>flameshot gui</command>
       </action>
     </keybind>
+    <keybind key="C-A-S-t">
+      <action name="Execute">
+        <command>wmctrl -a Terminal</command>
+      </action>
+    </keybind>
     <keybind key="C-grave">
       <action name="Execute">
         <command>xfce4-popup-clipman</command>

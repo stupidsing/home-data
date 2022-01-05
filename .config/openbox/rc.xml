@@ -255,6 +255,11 @@
       </action>
     </keybind>
     <!-- Keybindings for running applications -->
+    <keybind key="C-A-S-c">
+      <action name="Execute">
+        <command>wmctrl -a code</command>
+      </action>
+    </keybind>
     <keybind key="C-A-S-e">
       <action name="Execute">
         <command>wmctrl -a scite</command>
@@ -268,6 +273,15 @@
     <keybind key="C-grave">
       <action name="Execute">
         <command>xfce4-popup-clipman</command>
+      </action>
+    </keybind>
+    <keybind key="W-l">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Screen Lock</name>
+        </startupnotify>
+        <command>i3lock -c 000000</command>
       </action>
     </keybind>
     <keybind key="W-w">
@@ -665,7 +679,7 @@
   # order that they appear in this list
 
 
-    # each rule element can be left out or set to 'default' to specify to not 
+    # each rule element can be left out or set to 'default' to specify to not
     # change that attribute of the window
 
     <decor>yes</decor>

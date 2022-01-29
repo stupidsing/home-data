@@ -35,11 +35,6 @@ restore() {
 
 restore /opt/madedit
 
-FONTDIR=/usr/share/fonts/X11/misc
-for FONT in 6x13 6x13B; do
-  restore ${FONTDIR}/ywsing-${FONT}.pcf.gz
-done
-
 mkfontdir ${FONTDIR} && su ywsing -c "xset fp rehash"
 
 # disables font emboldening
@@ -66,19 +61,17 @@ chmod 440 /etc/sudoers.d/it_dog
 ################################################################################
 # User profile setup
 restoreHome() {
-  restore "/home/ywsing/${1}"
+  for I in $@; do
+    restore "/home/ywsing/${I}"
+  done
 }
 
 rmdir /home/ywsing/*
 
 restoreHome .asoundrc
-restoreHome .config/user-dirs.dirs
-restoreHome .config/terminator
-restoreHome .config/tint2
+restoreHome .config/user-dirs.dirs .config/terminator .config/tint2
 restoreHome .dosbox
-restoreHome .tight-gtkrc-2.0
-restoreHome .fonts/
-restoreHome .fonts.conf
+restoreHome .fonts/ .fonts.conf
 restoreHome .gcin
 restoreHome .inputrc
 restoreHome .koules-levels
@@ -86,12 +79,8 @@ restoreHome .madedit
 restoreHome .purple
 restoreHome .ssh
 restoreHome .supertux2
-restoreHome .tilda
-restoreHome .torcs
-restoreHome .thunderbird
-restoreHome .vim
-restoreHome .viminfo
-restoreHome .vimrc
+restoreHome .tight-gtkrc-2.0 .tilda .torcs
+restoreHome .vim .viminfo .vimrc
 restoreHome .VirtualBox
 restoreHome bin
 restoreHome desktop
@@ -161,7 +150,7 @@ apt-get -y dist-upgrade && (
     keepassxc \
     lcdf-typetools leafpad libreadline-dev \
     mpg321 \
-    obconf openbox openjdk-14-jdk openvpn \
+    obconf openbox \
     pavucontrol pcmanfm poppler-utils \
     rename rlwrap rsync rxvt-unicode \
     scite ssh sshfs subversion supertux \
@@ -177,20 +166,15 @@ apt-get -y dist-upgrade && (
 ) &&
 apt-get clean
 
-# flashplugin-nonfree totem-gstreamer
 # wesnoth
 # rar unrar # No installation candidate?
-# google-chrome-beta # Need to add google repo
-# fglrx-updates # open source driver is enough?
 # lame # ripping mp3s
-# kompozer # no installation candidates
 
 # disables global hidden menu bar
 apt-get -y remove --purge unity-gtk2-module unity-gtk3-module appmenu-qt
 
 apt-get -y remove --purge \
   evolution-data-server \
-  fonts-liberation \
   scim \
   ttf-arphic-uming ttf-liberation ttf-mscorefonts-installer ttf-unfonts-core ttf-wqy-microhei
 apt-get -y remove --purge `deborphan`
@@ -209,8 +193,6 @@ WQYFONTCONFIG=/etc/fonts/conf.avail/44-wqy-zenhei.conf
     sed -i 's/<alias>/<!--alias>/g' ${WQYFONTCONFIG}
     sed -i 's/<\/alias>/<\/alias-->/g' ${WQYFONTCONFIG}
 )
-
-systemctl disable openvpn
 
 # disables sleep button
 # sed -i s/^event=/#event=/ /etc/acpi/events/sleepbtn
@@ -236,8 +218,6 @@ su ywsing -c "
   #cd suite/ && mvn -Dmaven.test.skip=true eclipse:eclipse install assembly:single &&
   true
 "
-
-#echo "gtk-menu-popup-delay = 0" > /home/ywsing/.gtkrc-2.0
 
 echo Please restart.
 

@@ -141,6 +141,10 @@ rsync2() {
 	rsync -avz "${1}" "${2}"
 }
 
+ssh-quiet() {
+	ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $@
+}
+
 stock() {
 	if [ "${1}" ]; then
 		local H=${1:0:1}

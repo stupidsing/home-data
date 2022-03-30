@@ -10,4 +10,5 @@
     "window.restoreWindows": "none",
     "window.zoomLevel": 0,
     "workbench.editor.enablePreview": false,
+    "workbench.startupEditor.enablePreview": "none"
 }

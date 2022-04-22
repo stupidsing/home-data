@@ -160,7 +160,7 @@ apt-get -y dist-upgrade && (
     w3m wine wkhtmltopdf wmctrl \
     xchm xclip xfce4-clipman xinput xscavenger \
     yeahconsole \
-    zip \
+    zbar-tools zip \
   ||
   exit 1
 ) &&

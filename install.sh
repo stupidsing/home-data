@@ -72,7 +72,6 @@ restoreHome .asoundrc
 restoreHome .config/user-dirs.dirs .config/terminator .config/tint2
 restoreHome .dosbox
 restoreHome .fonts/ .fonts.conf
-restoreHome .gcin
 restoreHome .inputrc
 restoreHome .koules-levels
 restoreHome .madedit
@@ -145,7 +144,7 @@ apt-get -y dist-upgrade && (
     catdoc chromium cifs-utils cmake \
     deborphan dosbox \
     flameshot fontforge \
-    g++ gcin gconf-editor gdb git-core gnome-tweak-tool gnugo gnumeric gparted gpicview graphviz gthumb \
+    g++ gconf-editor gdb git-core gnome-tweak-tool gnugo gnumeric gparted gpicview graphviz gthumb \
     i3lock imagemagick \
     keepassxc \
     lcdf-typetools leafpad libreadline-dev \
@@ -210,8 +209,6 @@ WQYFONTCONFIG=/etc/fonts/conf.avail/44-wqy-zenhei.conf
 
 ################################################################################
 # User setup after package installation
-su ywsing -c "im-switch -s gcin"
-
 su ywsing -c "
   git clone git://github.com/stupidsing/suite.git &&
   #mvn -Declipse.workspace=. eclipse:add-maven-repo &&

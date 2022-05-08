@@ -1,8 +1,10 @@
 set ai
 set encoding=utf-8
 set incsearch
+set mouse=
 set noswapfile
 set sw=4
 set ts=4
+set ttymouse=
 set viminfo=
 syn on

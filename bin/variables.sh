@@ -141,6 +141,10 @@ rsync2() {
 	rsync -avz "${1}" "${2}"
 }
 
+scp-quiet() {
+	scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $@
+}
+
 ssh-quiet() {
 	ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $@
 }

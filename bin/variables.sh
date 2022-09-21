@@ -116,6 +116,10 @@ fsel() {
 	done
 }
 
+gri() {
+	git rebase -i origin/${1}
+}
+
 hr() {
 	printf '%0*d\n\n' $(tput cols) | tr 0 ${1:-_}
 }
